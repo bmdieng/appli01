@@ -1,0 +1,52 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/macbookpro/.gradle/daemon/8.3/com.example.appli01.app-mergeDebugResources-28:/values-night-v31/values-night-v31.xml",
+            "map": [
+                {
+                    "source": "/Users/macbookpro/Documents/workspace/appli01/android/app/src/main/res/values-night-v31/styles.xml",
+                    "from": {
+                        "startLines": "3,17",
+                        "startColumns": "4,4",
+                        "startOffsets": "172,1046",
+                        "endLines": "10,19",
+                        "endColumns": "12,12",
+                        "endOffsets": "695,1210"
+                    },
+                    "to": {
+                        "startLines": "2,10",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,583",
+                        "endLines": "9,12",
+                        "endColumns": "12,12",
+                        "endOffsets": "578,747"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.example.appli01.app-mergeDebugResources-28:/values-night-v31/values-night-v31.xml",
+            "map": [
+                {
+                    "source": "/Users/macbookpro/Documents/workspace/appli01/android/app/src/main/res/values-night-v31/styles.xml",
+                    "from": {
+                        "startLines": "3,-1",
+                        "startColumns": "4,-1",
+                        "startOffsets": "172,-1",
+                        "endLines": "10,-1",
+                        "endColumns": "12,-1",
+                        "endOffsets": "695,-1"
+                    },
+                    "to": {
+                        "startLines": "2,10",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,583",
+                        "endLines": "9,12",
+                        "endColumns": "12,12",
+                        "endOffsets": "578,747"
+                    }
+                }
+            ]
+        }
+    ]
+}

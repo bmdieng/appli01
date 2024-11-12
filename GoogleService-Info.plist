@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>958438648451-j59qru3cs0mvpjtgjhq4ivdkd3j9tc3q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.958438648451-j59qru3cs0mvpjtgjhq4ivdkd3j9tc3q</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAzM8nc_5p-2SOfA1j6NXesgCIDwzznAuU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>958438648451</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>sn.yoboulma.digitprest.co</string>
+	<key>PROJECT_ID</key>
+	<string>linkme-21092</string>
+	<key>STORAGE_BUCKET</key>
+	<string>linkme-21092.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:958438648451:ios:bc9a883dd7e03ff71e49b6</string>
+	<key>DATABASE_URL</key>
+	<string>https://linkme-21092.firebaseio.com</string>
+</dict>
+</plist>

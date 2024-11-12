@@ -1,0 +1,92 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run
+
+## exception
+
+SentinelException: [Sentinel kind: Collected, valueAsString: <collected>] from reloadSources()
+
+```
+#0      new _OutstandingRequest (package:vm_service/src/vm_service.dart:261:34)
+#1      VmService._call.<anonymous closure> (package:vm_service/src/vm_service.dart:1778:25)
+#2      VmService._call (package:vm_service/src/vm_service.dart:1790:8)
+#3      VmService.reloadSources (package:vm_service/src/vm_service.dart:1410:7)
+#4      _reloadDeviceSources (package:flutter_tools/src/run_hot.dart:1382:33)
+<asynchronous suspension>
+#5      defaultReloadSourcesHelper (package:flutter_tools/src/run_hot.dart:1307:65)
+<asynchronous suspension>
+#6      HotRunner._reloadSources (package:flutter_tools/src/run_hot.dart:1028:38)
+<asynchronous suspension>
+#7      HotRunner._hotReloadHelper (package:flutter_tools/src/run_hot.dart:922:16)
+<asynchronous suspension>
+#8      HotRunner.restart (package:flutter_tools/src/run_hot.dart:796:36)
+<asynchronous suspension>
+#9      TerminalHandler._commonTerminalInputHandler (package:flutter_tools/src/resident_runner.dart:1783:40)
+<asynchronous suspension>
+#10     TerminalHandler.processTerminalInput (package:flutter_tools/src/resident_runner.dart:1836:7)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[32m[✓][39m Flutter (Channel stable, 3.24.4, on macOS 13.6.9 22G830 darwin-x64, locale fr-SN)
+    [32m•[39m Flutter version 3.24.4 on channel stable at /Users/macbookpro/Documents/flutter
+    [32m•[39m Upstream repository https://github.com/flutter/flutter.git
+    [32m•[39m Framework revision 603104015d (13 days ago), 2024-10-24 08:01:25 -0700
+    [32m•[39m Engine revision db49896cf2
+    [32m•[39m Dart version 3.5.4
+    [32m•[39m DevTools version 2.37.3
+
+[32m[✓][39m Android toolchain - develop for Android devices (Android SDK version 35.0.0)
+    [32m•[39m Android SDK at /Users/macbookpro/Library/Android/sdk
+    [32m•[39m Platform android-35, build-tools 35.0.0
+    [32m•[39m ANDROID_SDK_ROOT = /Users/macbookpro/Library/Android/sdk
+    [32m•[39m Java binary at: /Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java
+    [32m•[39m Java version OpenJDK Runtime Environment (build 17.0.10+0-17.0.10b1087.21-11609105)
+    [32m•[39m All Android licenses accepted.
+
+[32m[✓][39m Xcode - develop for iOS and macOS (Xcode 15.2)
+    [32m•[39m Xcode at /Applications/Xcode.app/Contents/Developer
+    [32m•[39m Build 15C500b
+    [32m•[39m CocoaPods version 1.16.2
+
+[32m[✓][39m Chrome - develop for the web
+    [32m•[39m Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[32m[✓][39m Android Studio (version 2024.1)
+    [32m•[39m Android Studio at /Applications/Android Studio.app/Contents
+    [32m•[39m Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    [32m•[39m Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    [32m•[39m Java version OpenJDK Runtime Environment (build 17.0.10+0-17.0.10b1087.21-11609105)
+
+[32m[✓][39m IntelliJ IDEA Ultimate Edition (version 2024.2)
+    [32m•[39m IntelliJ at /Applications/IntelliJ IDEA.app
+    [32m•[39m Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    [32m•[39m Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+
+[32m[✓][39m VS Code (version 1.90.2)
+    [32m•[39m VS Code at /Users/macbookpro/Downloads/Visual Studio Code.app/Contents
+    [32m•[39m Flutter extension version 3.100.0
+
+[32m[✓][39m Connected device (3 available)
+    [32m•[39m sdk gphone64 x86 64 (mobile) • emulator-5554 • android-x64    • Android 14 (API 34) (emulator)
+    [32m•[39m macOS (desktop)              • macos         • darwin-x64     • macOS 13.6.9 22G830 darwin-x64
+    [32m•[39m Chrome (web)                 • chrome        • web-javascript • Google Chrome 130.0.6723.92
+    [33m![39m Error: Browsing on the local area network for iPhone de SONATEL. Ensure the device is unlocked and attached with a cable or associated with the same local area network as this Mac.
+      The device must be opted into Developer Mode to connect wirelessly. (code -27)
+    [33m![39m Error: Browsing on the local area network for iPhone de Ibrahima aw. Ensure the device is unlocked and attached with a cable or associated with the same local area network as this Mac.
+      The device must be opted into Developer Mode to connect wirelessly. (code -27)
+
+[32m[✓][39m Network resources
+    [32m•[39m All expected network resources are available.
+
+[32m•[39m No issues found!
+```
