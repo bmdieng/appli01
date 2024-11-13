@@ -1,4 +1,3 @@
-import 'package:appli01/main_listview.dart';
 import 'package:flutter/material.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
@@ -47,17 +46,14 @@ class LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Bienvenue ! Vous êtes connecté.')),
       );
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage(email: _email,)),
-      );
+      Navigator.pushNamed(context,  '/');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 241, 234, 226), //Colors.white,
       // appBar: AppBar(
       //   title: const Text("Login Page"),
       // ),
@@ -71,7 +67,25 @@ class LoginPageState extends State<LoginPage> {
                 child: SizedBox(
                     width: 230,
                     height: 180,
-                    child: Image.asset('assets/images/logo_2.png')),
+                    child: Image.asset('assets/images/logo_transparent.png')),
+              ),
+              // const Center(
+              //   child: Text(appName, style: TextStyle(
+              //     fontSize: 30,
+              //     fontWeight: FontWeight.bold,
+              //     color: Color(0xFFBB8547)
+              //   ),),
+              // ),
+              const Padding(
+                padding: const EdgeInsets.only(
+                    top: 15.0, bottom: 5.0, left: 40.0, right: 40.0),
+                child: Text("Trouvez le bon expert, tout près de chez vous.", style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFBB8547)
+                ), 
+                textAlign: TextAlign.center
+                ),
               ),
               Padding(
                 //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
@@ -82,7 +96,7 @@ class LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: Icon(Icons.email, color: Color(0xFFBB8547),),
                     hintText: "Saisissez votre Email.",
                     // use the getter variable defined above
                   ),
@@ -101,7 +115,7 @@ class LoginPageState extends State<LoginPage> {
                     border: const OutlineInputBorder(),
                     labelText: 'Password',
                     hintText: 'Saisissez votre mot de passe.',
-                    prefixIcon: const Icon(Icons.lock),
+                    prefixIcon: const Icon(Icons.lock, color: Color(0xFFBB8547)),
                     suffixIcon: InkWell(
                       onTap: () {
                         setState(() {

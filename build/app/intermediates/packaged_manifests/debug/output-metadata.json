@@ -4,7 +4,7 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.example.appli01",
+  "applicationId": "sn.yoboulma.digitprest.co",
   "variantName": "debug",
   "elements": [
     {

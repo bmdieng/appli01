@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.appli01.app-mergeDebugResources-28:/values-night-v8/values-night-v8.xml",
+            "outputFile": "sn.yoboulma.digitprest.co.app-mergeDebugResources-31:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/macbookpro/Documents/workspace/appli01/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/macbookpro/Documents/workspace/Projets Flutter/appli01/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,18",
                         "startColumns": "4,4",

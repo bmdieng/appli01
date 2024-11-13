@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:ligueypro/constants/constants.dart';
 
 class AidePage extends StatefulWidget{
   const AidePage({super.key});
@@ -24,7 +25,7 @@ class AidePageState extends State<AidePage>{
   Widget build(BuildContext context) {
     getCountries();
     return Scaffold(
-      appBar: AppBar(title: const Text("Digitrest Consulting"), elevation: 18),
+      // appBar: AppBar(title: const Text(appName), elevation: 18),
       body: ListView.builder(
         itemCount: countrieList.length,
         itemBuilder: (context, index) {

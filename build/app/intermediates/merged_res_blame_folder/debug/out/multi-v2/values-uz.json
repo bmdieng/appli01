@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.appli01.app-mergeDebugResources-28:/values-uz/values-uz.xml",
+            "outputFile": "sn.yoboulma.digitprest.co.app-mergeDebugResources-31:/values-uz/values-uz.xml",
             "map": [
                 {
-                    "source": "/Users/macbookpro/.gradle/caches/transforms-3/5ecd5a1cc2195013671502cd2470e636/transformed/browser-1.4.0/res/values-uz/values-uz.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,173,282,392",
-                        "endColumns": "117,108,109,105",
-                        "endOffsets": "168,277,387,493"
-                    },
-                    "to": {
-                        "startLines": "27,28,29,30",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "3032,3150,3259,3369",
-                        "endColumns": "117,108,109,105",
-                        "endOffsets": "3145,3254,3364,3470"
-                    }
-                },
-                {
-                    "source": "/Users/macbookpro/.gradle/caches/transforms-3/96004e15647bc525170b7742251f128d/transformed/jetified-play-services-basement-18.3.0/res/values-uz/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "145",
-                        "endOffsets": "340"
-                    },
-                    "to": {
-                        "startLines": "17",
-                        "startColumns": "4",
-                        "startOffsets": "1788",
-                        "endColumns": "149",
-                        "endOffsets": "1933"
-                    }
-                },
-                {
-                    "source": "/Users/macbookpro/.gradle/caches/transforms-3/c666c258fca39b3353b46678a6b928ab/transformed/core-1.13.1/res/values-uz/values-uz.xml",
+                    "source": "/Users/macbookpro/.gradle/caches/transforms-3/25303bfa731ad2ab17d3513b6410954f/transformed/core-1.13.1/res/values-uz/values-uz.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -55,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/macbookpro/.gradle/caches/transforms-3/6dadd0bfa2d44ddeab91e958645034df/transformed/jetified-play-services-base-18.0.1/res/values-uz/values.xml",
+                    "source": "/Users/macbookpro/.gradle/caches/transforms-3/23bc4077dab0cc0039a2fc3ae26adf7d/transformed/jetified-play-services-base-18.0.1/res/values-uz/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -69,6 +35,40 @@
                         "startOffsets": "791,896,1046,1175,1284,1429,1562,1682,1938,2110,2218,2377,2509,2663,2825,2891,2952",
                         "endColumns": "104,149,128,108,144,132,119,105,171,107,158,131,153,161,65,60,79",
                         "endOffsets": "891,1041,1170,1279,1424,1557,1677,1783,2105,2213,2372,2504,2658,2820,2886,2947,3027"
+                    }
+                },
+                {
+                    "source": "/Users/macbookpro/.gradle/caches/transforms-3/790e5358c22551293e10276c514e9d00/transformed/browser-1.4.0/res/values-uz/values-uz.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,173,282,392",
+                        "endColumns": "117,108,109,105",
+                        "endOffsets": "168,277,387,493"
+                    },
+                    "to": {
+                        "startLines": "27,28,29,30",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3032,3150,3259,3369",
+                        "endColumns": "117,108,109,105",
+                        "endOffsets": "3145,3254,3364,3470"
+                    }
+                },
+                {
+                    "source": "/Users/macbookpro/.gradle/caches/transforms-3/c0acdb96f3544722b4ad61ef1c790068/transformed/jetified-play-services-basement-18.3.0/res/values-uz/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "145",
+                        "endOffsets": "340"
+                    },
+                    "to": {
+                        "startLines": "17",
+                        "startColumns": "4",
+                        "startOffsets": "1788",
+                        "endColumns": "149",
+                        "endOffsets": "1933"
                     }
                 }
             ]

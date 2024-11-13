@@ -25,37 +25,8 @@ class AccueilPageState extends State<AccueilPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bg,
-      body: Stack(
-        children: [
-          PageView(
-            children: [
-              ListView.separated(
-                itemCount: images.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.all(5),
-                    child: Image.network(images[index], width: 400, height: 280)
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
-              ),
-            ],
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        // elevation: 0,
-        // backgroundColor: Colors.pinkAccent,
-        // foregroundColor: Colors.white,
-        onPressed: (){
-          setState(() {
-            bg =  Colors.blueGrey;
-          });
-        },
-        child: const Icon(Icons.add)),
     );
   }
+  
 
 }
