@@ -4,12 +4,13 @@
  * BSD-style license that can be found in the LICENSE file.
  */
 
-#import <Firebase/Firebase.h>
+@import FirebaseAuth;
 #import <Foundation/Foundation.h>
 #import "firebase_auth_messages.g.h"
 
 @interface PigeonParser : NSObject
 
++ (NSArray *_Nonnull)getManualList:(nonnull PigeonUserDetails *)userDetails;
 + (PigeonUserCredential *_Nullable)
     getPigeonUserCredentialFromAuthResult:(nonnull FIRAuthDataResult *)authResult
                         authorizationCode:(nullable NSString *)authorizationCode;
@@ -20,7 +21,10 @@
     (nullable PigeonActionCodeSettings *)settings;
 + (PigeonUserCredential *_Nullable)getPigeonUserCredentialFromFIRUser:(nonnull FIRUser *)user;
 + (PigeonIdTokenResult *_Nonnull)parseIdTokenResult:(nonnull FIRAuthTokenResult *)tokenResult;
+#if TARGET_OS_IPHONE
 + (PigeonTotpSecret *_Nonnull)getPigeonTotpSecret:(nonnull FIRTOTPSecret *)secret;
+#endif
 + (PigeonAuthCredential *_Nullable)getPigeonAuthCredential:
-    (FIRAuthCredential *_Nullable)authCredential;
+                                       (FIRAuthCredential *_Nullable)authCredentialToken
+                                                     token:(NSNumber *_Nullable)token;
 @end

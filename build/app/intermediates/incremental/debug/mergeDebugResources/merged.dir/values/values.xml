@@ -55,10 +55,6 @@
     <attr format="string" name="tag"/>
     <color name="androidx_core_ripple_material_light">#1f000000</color>
     <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
-    <color name="browser_actions_bg_grey">#F5F5F5</color>
-    <color name="browser_actions_divider_color">#1E000000</color>
-    <color name="browser_actions_text_color">#DE000000</color>
-    <color name="browser_actions_title_color">#646464</color>
     <color name="call_notification_answer_color">#1d873b</color>
     <color name="call_notification_decline_color">#d93025</color>
     <color name="common_google_signin_btn_text_dark_default">@android:color/white</color>
@@ -71,8 +67,6 @@
     <color name="common_google_signin_btn_text_light_pressed">#DE000000</color>
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
-    <dimen name="browser_actions_context_menu_max_width">500dp</dimen>
-    <dimen name="browser_actions_context_menu_min_padding">20dp</dimen>
     <dimen name="compat_button_inset_horizontal_material">4dp</dimen>
     <dimen name="compat_button_inset_vertical_material">6dp</dimen>
     <dimen name="compat_button_padding_horizontal_material">8dp</dimen>
@@ -185,26 +179,16 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
-    <string name="copy_toast_msg">Link copied to clipboard</string>
-    <string name="default_web_client_id" translatable="false">958438648451-7bj0id5dbjorcsuu7u3dna687gbtsdq1.apps.googleusercontent.com</string>
-    <string name="fallback_menu_item_copy_link">Copy link</string>
-    <string name="fallback_menu_item_open_in_browser">Open in browser</string>
-    <string name="fallback_menu_item_share_link">Share link</string>
-    <string name="firebase_database_url" translatable="false">https://linkme-21092.firebaseio.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">958438648451</string>
-    <string name="google_api_key" translatable="false">AIzaSyAYCzcVH6sCSx-hONMLjU5ypaljg4kH6xE</string>
-    <string name="google_app_id" translatable="false">1:958438648451:android:ee3cd8d0c914768a1e49b6</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAYCzcVH6sCSx-hONMLjU5ypaljg4kH6xE</string>
-    <string name="google_storage_bucket" translatable="false">linkme-21092.appspot.com</string>
-    <string name="project_id" translatable="false">linkme-21092</string>
+    <string name="gcm_defaultSenderId" translatable="false">1036306872826</string>
+    <string name="google_api_key" translatable="false">AIzaSyDVp2hgX3hKMinqjH5B38hA-YrluioT-7E</string>
+    <string name="google_app_id" translatable="false">1:1036306872826:android:f3ed7a9a92bb880908cc43</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDVp2hgX3hKMinqjH5B38hA-YrluioT-7E</string>
+    <string name="google_storage_bucket" translatable="false">ligueypro.firebasestorage.app</string>
+    <string name="project_id" translatable="false">ligueypro</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
         
         <item name="android:windowBackground">@drawable/launch_background</item>
-        <item name="android:forceDarkAllowed">false</item>
-        <item name="android:windowFullscreen">false</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
-        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>

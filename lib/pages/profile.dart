@@ -12,7 +12,9 @@ class ProfilePage extends StatelessWidget {
       "email": "momodieng00@gmail.com",
       'profile': "Administrateur",
       "call": "77 720 02 26",
-      "address": "Hann Mariste 1 - Dakar/Sénégal"
+      "address": "Hann Mariste 1 - Dakar/Sénégal",
+      "categorie": "Electricien",
+      "description": "Je suis un ouvrier qualifié et disponible 24/24, 7j/7 pour vos dépannage."
     }
   ];
     return Scaffold(
@@ -26,11 +28,11 @@ class ProfilePage extends StatelessWidget {
             flex: 3,
             child: Padding(
               padding: const EdgeInsets.only(
-                    top: 5.0, bottom: 5.0, left: 30.0, right: 30.0),
+                    top: 0, bottom: 0, left: 30.0, right: 30.0),
               child: ListView(
                 children: [
                   Text(
-                    userData[0]['name'],
+                    userData[0]['name'], textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
@@ -39,36 +41,52 @@ class ProfilePage extends StatelessWidget {
                   // const SizedBox(height: 16),
                     ListTile(
                       leading: const Icon(Icons.person_2_rounded, color:  Color(0xFFBB8547)),
-                      title: const Text('Profile: ', style: TextStyle(fontSize: 20, color:  Color(0xFFBB8547))),
+                      title: const Text('Profile: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
                       subtitle: Text(userData[0]['profile']),
                       enabled: false,
                       onTap: () {},
                     ),
-                    Divider(),
+                    // Divider(),
                     ListTile(
                       leading: const Icon(Icons.call_end_rounded, color:  Color(0xFFBB8547)),
-                      title: const Text('Téléphone: ', style: TextStyle(fontSize: 20, color:  Color(0xFFBB8547))),
+                      title: const Text('Téléphone: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
                       subtitle: Text(userData[0]['call']),
                       enabled: false,
                       onTap: () {},
                     ),
-                    Divider(),
+                    // Divider(),
                     ListTile(
                       leading: const Icon(Icons.email_rounded, color:  Color(0xFFBB8547)),
-                      title: const Text('Email: ', style: TextStyle(fontSize: 20, color:  Color(0xFFBB8547))),
+                      title: const Text('Email: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
                       subtitle: Text(userData[0]['email']),
                       enabled: false,
                       onTap: () {},
                     ),
-                    Divider(),
+                    // Divider(),
                     ListTile(
                       leading: const Icon(Icons.pin_drop_rounded, color:  Color(0xFFBB8547)),
-                      title: const Text('Adresse: ', style: TextStyle(fontSize: 20, )),
+                      title: const Text('Adresse: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
                       subtitle: Text(userData[0]['address']),
                       enabled: false,
                       onTap: () {},
                     ),
-                  const SizedBox(height: 16),
+                    // Divider(),
+                    ListTile(
+                      leading: const Icon(Icons.category_rounded, color:  Color(0xFFBB8547)),
+                      title: const Text('Catégorie: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
+                      subtitle: Text(userData[0]['categorie']),
+                      enabled: false,
+                      onTap: () {},
+                    ),
+                    // Divider(),
+                    ListTile(
+                      leading: const Icon(Icons.description_rounded, color:  Color(0xFFBB8547)),
+                      title: const Text('Description: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
+                      subtitle: Text(userData[0]['description']),
+                      enabled: false,
+                      onTap: () {},
+                    ),
+                  // const SizedBox(height: 16),
                 ],
               ),
             ),
@@ -88,8 +106,8 @@ class _TopPortion extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         Container(
-          height: 10,
-          margin: const EdgeInsets.only(bottom: 50),
+          // height: 10,
+          margin: const EdgeInsets.only(bottom: 60),
           decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.bottomCenter,

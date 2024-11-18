@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ligueypro/constants/constants.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,6 +15,7 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   bool passToggle = true;
   String _email = '';
+  String _password = '';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String? validateEmail(String? email) {
@@ -40,18 +45,67 @@ class LoginPageState extends State<LoginPage> {
     return null;
   }
 
-  void _submit() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Bienvenue ! Vous êtes connecté.')),
+
+  showToast(message){
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.SNACKBAR,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 18.0,
       );
-      Navigator.pushNamed(context,  '/');
-    }
+  }
+
+  showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(appName),
+          content: const Text("Votre identifiant ou mot de passe est incorrect. Merci de réessayer."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _submit() async {
+      try {
+           final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+           email: _email,
+            password: _password
+          );
+          if (_formKey.currentState!.validate()) {
+              _formKey.currentState!.save();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Bienvenue ! Vous êtes connecté.')),
+              );
+              Navigator.pushNamed(context,  '/');
+            }
+        } on FirebaseAuthException catch (e) {
+          showAlertDialog(context);
+        if (e.code == 'user-not-found') {
+            print("L'utilisateur n'exsite pas !");
+              showAlertDialog(context);
+          } else if (e.code == 'wrong-password') {
+              showAlertDialog(context);
+            }
+          }
+
   }
 
   @override
   Widget build(BuildContext context) {
+    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+    DatabaseReference _databaseRef = FirebaseDatabase.instance.ref().child('profiles');
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 234, 226), //Colors.white,
       // appBar: AppBar(
@@ -69,13 +123,6 @@ class LoginPageState extends State<LoginPage> {
                     height: 180,
                     child: Image.asset('assets/images/logo_transparent.png')),
               ),
-              // const Center(
-              //   child: Text(appName, style: TextStyle(
-              //     fontSize: 30,
-              //     fontWeight: FontWeight.bold,
-              //     color: Color(0xFFBB8547)
-              //   ),),
-              // ),
               const Padding(
                 padding: const EdgeInsets.only(
                     top: 15.0, bottom: 5.0, left: 40.0, right: 40.0),
@@ -88,7 +135,6 @@ class LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
                 padding: const EdgeInsets.only(
                     top: 15.0, bottom: 5.0, left: 30.0, right: 30.0),
                 child: TextFormField(
@@ -98,7 +144,6 @@ class LoginPageState extends State<LoginPage> {
                     labelText: 'Email',
                     prefixIcon: Icon(Icons.email, color: Color(0xFFBB8547),),
                     hintText: "Saisissez votre Email.",
-                    // use the getter variable defined above
                   ),
                   validator: validateEmail,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -108,7 +153,6 @@ class LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 30.0, right: 30.0, top: 15, bottom: 10),
-                //padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextFormField(
                   obscureText: passToggle,
                   decoration: InputDecoration(
@@ -127,6 +171,7 @@ class LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   validator: validatePassword,
+                  onChanged: (text) => setState(() => _password = text),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
               ),
@@ -134,7 +179,13 @@ class LoginPageState extends State<LoginPage> {
                 alignment: Alignment.topRight,
                 padding: const EdgeInsets.only(right: 18.0),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // _databaseRef.onValue.listen(
+                    //   (event){
+                    //     print('La valeur de profile : ${event.snapshot.value.toString()}');
+                    //   }
+                    // );
+                  },
                   child: const Text(
                     'Mot de passe oublié ?',
                     style: TextStyle(color: Colors.blue, fontSize: 15),
@@ -155,7 +206,9 @@ class LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context,  '/register');
+                },
                 child: const Text(
                   'Créer un compte',
                   style: TextStyle(color: Colors.black, fontSize: 15),

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_web_client_id" translatable="false">958438648451-7bj0id5dbjorcsuu7u3dna687gbtsdq1.apps.googleusercontent.com</string>
-    <string name="firebase_database_url" translatable="false">https://linkme-21092.firebaseio.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">958438648451</string>
-    <string name="google_api_key" translatable="false">AIzaSyAYCzcVH6sCSx-hONMLjU5ypaljg4kH6xE</string>
-    <string name="google_app_id" translatable="false">1:958438648451:android:ee3cd8d0c914768a1e49b6</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAYCzcVH6sCSx-hONMLjU5ypaljg4kH6xE</string>
-    <string name="google_storage_bucket" translatable="false">linkme-21092.appspot.com</string>
-    <string name="project_id" translatable="false">linkme-21092</string>
+    <string name="gcm_defaultSenderId" translatable="false">1036306872826</string>
+    <string name="google_api_key" translatable="false">AIzaSyDVp2hgX3hKMinqjH5B38hA-YrluioT-7E</string>
+    <string name="google_app_id" translatable="false">1:1036306872826:android:f3ed7a9a92bb880908cc43</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDVp2hgX3hKMinqjH5B38hA-YrluioT-7E</string>
+    <string name="google_storage_bucket" translatable="false">ligueypro.firebasestorage.app</string>
+    <string name="project_id" translatable="false">ligueypro</string>
 </resources>

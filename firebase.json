@@ -1,0 +1,31 @@
+{
+    "flutter": {
+      "platforms": {
+        "android": {
+          "default": {
+            "projectId": "ligueypro",
+            "appId": "1:1036306872826:android:f3ed7a9a92bb880908cc43",
+            "fileOutput": "android/app/google-services.json"
+          }
+        },
+        "ios": {
+          "default": {
+            "projectId": "ligueypro",
+            "appId": "1:1036306872826:ios:ca7f25a85163677b08cc43",
+            "uploadDebugSymbols": false,
+            "fileOutput": "ios/Runner/GoogleService-Info.plist"
+          }
+        },
+        "dart": {
+          "lib/firebase_options.dart": {
+            "projectId": "ligueypro",
+            "configurations": {
+              "android": "1:1036306872826:android:f3ed7a9a92bb880908cc43",
+              "ios": "1:1036306872826:ios:ca7f25a85163677b08cc43",
+              "web": "1:1036306872826:web:0d43d2f00011c9f008cc43"
+            }
+          }
+        }
+      }
+    }
+  }

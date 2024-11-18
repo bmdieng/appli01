@@ -9,3 +9,11 @@ const InputDecoration kTextInputDecoration = InputDecoration(
   hintText: '',
   // ),
 );
+const firebaseConfig = {
+  'apiKey': "AIzaSyDzH26-VT-mDJZL5-Xh9DoWlSL56ED9Q44",
+  'authDomain': "ligueypro.firebaseapp.com",
+  'projectId': "ligueypro",
+  'storageBucket': "ligueypro.firebasestorage.app",
+  'messagingSenderId': "1036306872826",
+  'appId': "1:1036306872826:web:a45a56e2a18f9e7108cc43"
+};

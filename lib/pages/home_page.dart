@@ -1,5 +1,5 @@
 import 'package:ligueypro/constants/constants.dart';
-import 'package:ligueypro/pages/accueil.dart';
+import 'package:ligueypro/pages/dashboard.dart';
 import 'package:ligueypro/pages/aide.dart';
 import 'package:ligueypro/pages/apropos.dart';
 import 'package:ligueypro/pages/charte.dart';
@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 *  Stateful widget prend en charge les événements comme les cliques
 */
 class HomePage extends StatefulWidget{
-  final String? email;
 
-  const HomePage({super.key, required this.email });
+
+  const HomePage({super.key });
  
   @override
   State<HomePage> createState() {
@@ -110,37 +110,37 @@ class HomePageState extends State<HomePage>{
             ListTile(
               leading: const Icon(Icons.edit_document),
               trailing: const Icon(Icons.chevron_right_rounded),
-              title: const Text('Poster offre de livraison'),
+              title: const Text('Rechercher un Professionnel '),
               onTap: () {
                 Navigator.pushNamed(
                   context, 
-                  '/offre');
+                  '/professionnel');
               },
             ),
             ListTile(
               leading: const Icon(Icons.edit_document),
               trailing: const Icon(Icons.chevron_right_rounded),
-              title: const Text('Publier une annonce'),
+              title: const Text('Nos Services'),
               onTap: () {
                 Navigator.pushNamed(
                   context, 
-                  '/annonce');
+                  '/services');
               },
             ),
             ListTile(
               leading: const Icon(Icons.info),
               trailing: const Icon(Icons.chevron_right_rounded),
-              title: const Text('A Propos'),
+              title: const Text('Publier une Demande'),
               onTap: () {
                 Navigator.pushNamed(
                   context, 
-                  '/apropos');
+                  '/demande');
               },
             ),
             ListTile(
               leading: const Icon(Icons.help),
               trailing: const Icon(Icons.chevron_right_rounded),
-              title: const Text('Aide'),
+              title: const Text('Aide et Assistance'),
               onTap: () {
                 Navigator.pushNamed(
                   context, 

@@ -6,10 +6,19 @@ import 'package:ligueypro/pages/charte.dart';
 import 'package:ligueypro/pages/home_page.dart';
 import 'package:ligueypro/pages/login.dart';
 import 'package:ligueypro/pages/profile.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:ligueypro/pages/register.dart';
+import 'firebase_options.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main(){
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
+
 
 
 class MyApp extends StatelessWidget{
@@ -25,8 +34,9 @@ class MyApp extends StatelessWidget{
       // home: HomePage(),
       initialRoute: '/login',
       routes: {
-        '/' : (context) => const HomePage(email: '',),
-        '/profile' : (context) => ProfilePage(),
+        '/' : (context) => const HomePage(),
+        '/register' : (context) => const RegisterPage(),
+        '/profile' : (context) => const ProfilePage(),
         '/apropos' : (context) => const AproposPage(),
         '/annonce' : (context) => const LoginPage(),
         '/offre' : (context) => const LoginPage(),
@@ -35,6 +45,15 @@ class MyApp extends StatelessWidget{
         '/aide' : (context) => const AidePage(),
       },
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'), // English
+          Locale('fr'), // Francais
+        ],
     );
   }
 }
