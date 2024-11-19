@@ -8,6 +8,7 @@ import 'package:ligueypro/pages/login.dart';
 import 'package:ligueypro/pages/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ligueypro/pages/register.dart';
+import 'package:ligueypro/pages/reset_password.dart';
 import 'firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget{
         '/charte' : (context) => const ChartePage(),
         '/login' : (context) => const LoginPage(),
         '/aide' : (context) => const AidePage(),
+        '/reset_password' : (context) => const ResetPasswordPage()
       },
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [

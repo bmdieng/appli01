@@ -180,6 +180,7 @@ class LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.only(right: 18.0),
                 child: TextButton(
                   onPressed: () {
+                    Navigator.pushNamed(context,  '/reset_password');
                     // _databaseRef.onValue.listen(
                     //   (event){
                     //     print('La valeur de profile : ${event.snapshot.value.toString()}');

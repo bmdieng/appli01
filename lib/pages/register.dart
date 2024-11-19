@@ -155,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
 
-    DatabaseReference _databaseRef = FirebaseDatabase.instance.ref().child('profiles');
+    // DatabaseReference _databaseRef = FirebaseDatabase.instance.ref().child('profiles');
     var size = MediaQuery.of(context).size;
     User? user = FirebaseAuth.instance.currentUser;
 
