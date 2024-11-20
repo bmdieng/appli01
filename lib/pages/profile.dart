@@ -1,23 +1,63 @@
+import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:ligueypro/constants/constants.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+
+class ProfilePage extends StatefulWidget{
+
+  const ProfilePage({super.key });
+ 
+  @override
+  State<ProfilePage> createState() {
+    return ProfilePageState();
+  }
+}
+
+
+class ProfilePageState extends State<ProfilePage>{
+    Map<dynamic, dynamic> userData = {};
+    String name = '';
+    String profile = '';
+    String call = '';
+    String email = '';
+    String address = '';
+    String categorie = '';
+    String description = '';
 
   @override
   Widget build(BuildContext context) {
-    final List userData = [
-    {
-      "name": 'Momoo DIENG',
-      "email": "momodieng00@gmail.com",
-      'profile': "Administrateur",
-      "call": "77 720 02 26",
-      "address": "Hann Mariste 1 - Dakar/Sénégal",
-      "categorie": "Electricien",
-      "description": "Je suis un ouvrier qualifié et disponible 24/24, 7j/7 pour vos dépannage."
-    }
-  ];
-    return Scaffold(
+
+  fetchUserData(User user) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("profiles/${user.uid}");
+    DatabaseEvent event = await ref.once();
+    userData = event.snapshot.value as Map<dynamic, dynamic>;
+    setState(() {
+      name = userData['name'];
+      profile = userData['profile'];
+      call = userData['phone'];
+      email = userData['email'];
+      address = userData['adresse'];
+      categorie = userData['categorie'];
+      description = userData['description'];
+    });
+  }
+  
+  Future<void> loadUserData() async {
+    FirebaseAuth.instance
+            .authStateChanges()
+            .listen((User? user) async {
+                if (user == null) {
+                  print('User is currently signed out!');
+                } else {
+                  // print('User is signed in ==> $user');
+                  fetchUserData(user);
+                }
+            });      
+  }
+
+  loadUserData();
+  return Scaffold(
       appBar: AppBar(backgroundColor: const Color(0xFFBB8547), // const Color(0xFF24353F), // Theme.of(context).colorScheme.inversePrimary,
       foregroundColor: Colors.white,
       title: Image.asset("assets/images/logo_transparent.png", height: 65, width: 300,)),
@@ -32,7 +72,7 @@ class ProfilePage extends StatelessWidget {
               child: ListView(
                 children: [
                   Text(
-                    userData[0]['name'], textAlign: TextAlign.center,
+                    name, textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
@@ -42,7 +82,7 @@ class ProfilePage extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.person_2_rounded, color:  Color(0xFFBB8547)),
                       title: const Text('Profile: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
-                      subtitle: Text(userData[0]['profile']),
+                      subtitle: Text(profile),
                       enabled: false,
                       onTap: () {},
                     ),
@@ -50,7 +90,7 @@ class ProfilePage extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.call_end_rounded, color:  Color(0xFFBB8547)),
                       title: const Text('Téléphone: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
-                      subtitle: Text(userData[0]['call']),
+                      subtitle: Text(call),
                       enabled: false,
                       onTap: () {},
                     ),
@@ -58,7 +98,7 @@ class ProfilePage extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.email_rounded, color:  Color(0xFFBB8547)),
                       title: const Text('Email: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
-                      subtitle: Text(userData[0]['email']),
+                      subtitle: Text(email),
                       enabled: false,
                       onTap: () {},
                     ),
@@ -66,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.pin_drop_rounded, color:  Color(0xFFBB8547)),
                       title: const Text('Adresse: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
-                      subtitle: Text(userData[0]['address']),
+                      subtitle: Text(address),
                       enabled: false,
                       onTap: () {},
                     ),
@@ -74,7 +114,7 @@ class ProfilePage extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.category_rounded, color:  Color(0xFFBB8547)),
                       title: const Text('Catégorie: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
-                      subtitle: Text(userData[0]['categorie']),
+                      subtitle: Text(categorie),
                       enabled: false,
                       onTap: () {},
                     ),
@@ -82,7 +122,7 @@ class ProfilePage extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.description_rounded, color:  Color(0xFFBB8547)),
                       title: const Text('Description: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
-                      subtitle: Text(userData[0]['description']),
+                      subtitle: Text(description),
                       enabled: false,
                       onTap: () {},
                     ),
@@ -93,9 +133,12 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
+    
     );
   }
 }
+
+
 
 class _TopPortion extends StatelessWidget {
   const _TopPortion({Key? key}) : super(key: key);

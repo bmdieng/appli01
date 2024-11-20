@@ -1,82 +1,72 @@
+import 'package:flutter/material.dart';
 import 'package:ligueypro/constants/constants.dart';
 import 'package:ligueypro/pages/dashboard.dart';
 import 'package:ligueypro/pages/aide.dart';
 import 'package:ligueypro/pages/apropos.dart';
 import 'package:ligueypro/pages/charte.dart';
-import 'package:flutter/material.dart';
 
-/*
-*  Stateful widget prend en charge les événements comme les cliques
-*/
-class HomePage extends StatefulWidget{
-
-
-  const HomePage({super.key });
- 
-  @override
-  State<HomePage> createState() {
-    return HomePageState();
-  }
-}
-
-// Widgets for each segment's content
-class Segment1Content extends StatelessWidget {
-  const Segment1Content({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Content for Segment 1'),
-    );
-  }
+  State<HomePage> createState() => _HomePageState();
 }
 
-class Segment2Content extends StatelessWidget {
-  const Segment2Content({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Content for Segment 2'),
-    );
-  }
-}
-
-
-class HomePageState extends State<HomePage>{
-  int counter = 0;
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int pageIndex = 0;
-  final pages = [
-    const AccueilPage(),
-    const AproposPage(),
-    const ChartePage(),
-    const AidePage()
+  late final TabController tabController;
+
+  final List<Widget> _pages = const [
+    AccueilPage(),
+    AproposPage(),
+    ChartePage(),
+    AidePage(),
   ];
 
   @override
-  Widget build(BuildContext context) {
-    int page = 0; 
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
   
-   return Scaffold(
+
+  @override
+  Widget build(BuildContext context) {
+  assert(tabController != null, 'tabController non initialisé');
+  return Scaffold(
     appBar: AppBar(
-      backgroundColor: const Color.fromARGB(255, 241, 234, 226), // const Color(0xFF24353F), // Theme.of(context).colorScheme.inversePrimary,
+      backgroundColor: const Color.fromARGB(255, 241, 234, 226),
       foregroundColor: const Color(0xFF24353F),
-      title: Image.asset("assets/images/logo_transparent.png", height: 65, width: 300,), 
+      title: Image.asset("assets/images/logo_transparent.png", height: 65, width: 300),
       elevation: 12,
       actions: [
-        IconButton(onPressed: (){
-
-        }, 
-        icon: const Icon(Icons.search)
-        ),
-        IconButton(onPressed: (){
-
-        }, 
-        icon: const Icon(Icons.notifications)
-        ),
-      ]
+        IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
+      ],
+      bottom: TabBar(
+        controller: tabController, // Assurez-vous que cette ligne est bien après `initState`.
+        tabs: const [
+          Tab(icon: Icon(Icons.directions_car)),
+          Tab(icon: Icon(Icons.directions_transit)),
+          Tab(icon: Icon(Icons.directions_bike)),
+        ],
+      ),
     ),
-    body: pages[pageIndex],
+    body: TabBarView(
+      controller: tabController,
+      children: const [
+        Icon(Icons.directions_car),
+        Icon(Icons.directions_transit),
+        Icon(Icons.directions_bike),
+      ],
+    ),
     drawer: Theme(data: Theme.of(context).copyWith(
           canvasColor: Colors.transparent,
           primaryColor: Colors.transparent,
@@ -179,34 +169,33 @@ class HomePageState extends State<HomePage>{
               ),
         ],
       ),
+      )
+    
+    
     ),
-    ),
-    bottomNavigationBar: Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-          color: Color(0xFF24353F), 
-          width: 0.3
-        )
-        ),
-        
+  );
+}
+
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: const Color.fromARGB(255, 241, 234, 226),
+      foregroundColor: const Color(0xFF24353F),
+      title: Image.asset("assets/images/logo_transparent.png", height: 65, width: 300),
+      elevation: 12,
+      actions: [
+        IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
+      ],
+      bottom: TabBar(
+        controller: tabController,
+        tabs: const [
+          Tab(icon: Icon(Icons.directions_car)),
+          Tab(icon: Icon(Icons.directions_transit)),
+          Tab(icon: Icon(Icons.directions_bike)),
+        ],
       ),
-      child: NavigationBar(
-      backgroundColor: Colors.white,
-      selectedIndex: pageIndex,
-      onDestinationSelected: (int index){
-        setState(() {
-          pageIndex = index;
-        });
-      },
-      destinations: const [
-        NavigationDestination(icon: Icon(Icons.home), label: 'Accueil'),
-        NavigationDestination(icon: Icon(Icons.info_sharp), label: 'A propos'),
-        NavigationDestination(icon: Icon(Icons.note_alt_rounded), label: 'Charte'),
-        NavigationDestination(icon: Icon(Icons.help), label: 'Aide')
-      ]
-      ),
-    )
-   );
+    );
   }
+
 }

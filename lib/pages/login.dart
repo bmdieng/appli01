@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ligueypro/constants/constants.dart';
 
@@ -83,6 +81,7 @@ class LoginPageState extends State<LoginPage> {
            email: _email,
             password: _password
           );
+
           if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
               ScaffoldMessenger.of(context).showSnackBar(
@@ -91,21 +90,31 @@ class LoginPageState extends State<LoginPage> {
               Navigator.pushNamed(context,  '/');
             }
         } on FirebaseAuthException catch (e) {
-          showAlertDialog(context);
-        if (e.code == 'user-not-found') {
-            print("L'utilisateur n'exsite pas !");
-              showAlertDialog(context);
-          } else if (e.code == 'wrong-password') {
-              showAlertDialog(context);
-            }
+          // String msg = AuthExceptionHandler.generateErrorMessage(e.code);
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text(appName),
+                  content: Text(AuthExceptionHandler.generateErrorMessage(e.code)),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+        
           }
 
   }
 
   @override
   Widget build(BuildContext context) {
-    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-    DatabaseReference _databaseRef = FirebaseDatabase.instance.ref().child('profiles');
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 241, 234, 226), //Colors.white,
       // appBar: AppBar(

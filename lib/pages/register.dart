@@ -141,14 +141,24 @@ class _RegisterPageState extends State<RegisterPage> {
             
 
           } on FirebaseAuthException catch (e) {
-            if (e.code == 'weak-password') {
-              showAlertDialog(context);
-            } else if (e.code == 'email-already-in-use') {
-              showAlertDialog(context);
-            }
-          } catch (e) {
-            print(e);
-          }
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text(appName),
+                  content: Text(AuthExceptionHandler.generateErrorMessage(e.code)),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          } 
 
   }
 

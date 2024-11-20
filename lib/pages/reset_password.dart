@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ligueypro/constants/constants.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   static const String id = 'reset_password';
@@ -23,15 +24,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   Future<void> sendPasswordResetEmail() async {
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text.trim());
+      await auth.sendPasswordResetEmail(email: _emailController.text.trim());
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Un lien de réinitialisation du mot de passe a été envoyé à votre adresse adresse e-mail!")),
       );
       Navigator.pushNamed(context,  '/login');
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Erreur d'envoie de mail de réinitialisation : ${e.toString()}")),
+        SnackBar(content: Text(AuthExceptionHandler.generateErrorMessage(e.code))),
       );
     }
   }
@@ -40,7 +40,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      body: ListView(
+        children: [
+          Container(
         width: size.width,
         height: size.height,
         color: const Color.fromARGB(255, 241, 234, 226),
@@ -56,13 +58,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   onTap: () => Navigator.pop(context),
                   child: const Icon(Icons.close, color: Color(0xFFBB8547), size: 30.0,),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 10),
                  Center(
                   child: SizedBox(
                       width: 230,
                       height: 100,
                       child: Image.asset('assets/images/logo_transparent.png')),
                 ),
+                const SizedBox(height: 20),
                 const Text(
                   "Vous avez oublié votre mot de passe ?",
                   style: TextStyle(
@@ -79,7 +82,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
                 const Text(
                   'Saisir votre adresse email',
                   style: TextStyle(
@@ -105,32 +108,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.brown),
                     decoration: const InputDecoration(
-                      // contentPadding:
-                          // EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(30.0))),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.black,
                           width: 1,
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            30.0,
-                          ),
-                        ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        // borderSide:
-                        //     BorderSide(color: Colors.black, width: 2.0),
-                        // borderRadius: BorderRadius.all(
-                        //   Radius.circular(
-                        //     30.0,
-                        //   ),
-                        // ),
-                      ),
-
                       isDense: true,
                       // fillColor: kPrimaryColor,
                       filled: true,
@@ -143,8 +128,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                const Expanded(child: SizedBox()),
+                SizedBox(height: (size.height/2.8)),
+                // const Expanded(child: SizedBox()),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 20,
                   child: Material(
@@ -175,6 +160,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           ),
         ),
       ),
+        ]
+      )
     );
   }
 }
