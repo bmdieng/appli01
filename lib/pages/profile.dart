@@ -22,8 +22,7 @@ class ProfilePageState extends State<ProfilePage>{
     String call = '';
     String email = '';
     String address = '';
-    String categorie = '';
-    String description = '';
+    String date = '';
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +37,7 @@ class ProfilePageState extends State<ProfilePage>{
       call = userData['phone'];
       email = userData['email'];
       address = userData['adresse'];
-      categorie = userData['categorie'];
-      description = userData['description'];
+      date = userData['date'];
     });
   }
   
@@ -110,19 +108,10 @@ class ProfilePageState extends State<ProfilePage>{
                       enabled: false,
                       onTap: () {},
                     ),
-                    // Divider(),
-                    ListTile(
-                      leading: const Icon(Icons.category_rounded, color:  Color(0xFFBB8547)),
-                      title: const Text('Catégorie: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
-                      subtitle: Text(categorie),
-                      enabled: false,
-                      onTap: () {},
-                    ),
-                    // Divider(),
-                    ListTile(
+                     ListTile(
                       leading: const Icon(Icons.description_rounded, color:  Color(0xFFBB8547)),
-                      title: const Text('Description: ', style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
-                      subtitle: Text(description),
+                      title: const Text("Date d'inscription: ", style: TextStyle(fontSize: 15, color:  Color(0xFFBB8547))),
+                      subtitle: Text(date),
                       enabled: false,
                       onTap: () {},
                     ),

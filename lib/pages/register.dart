@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:ligueypro/constants/constants.dart'; // for date format
-import 'package:loader_overlay/loader_overlay.dart';
+// import 'package:loader_overlay/loader_overlay.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -17,36 +17,19 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   bool _isChecked = false;
-  String  _selectedDOB = "Date de naissance";
+  // String  _selectedDOB = "Date de naissance";
   final _formkey = GlobalKey<FormState>();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _cpassword = TextEditingController();
   final TextEditingController _username = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _adresse = TextEditingController();
-  final TextEditingController _description = TextEditingController();
   TextEditingController phone = TextEditingController();
 
+  String profileValue = '';   
 
-  String cotegorieValue = 'Femme / Homme de ménage';   
-  String profileValue = 'Recruteur';   
-
-  // List of items in our dropdown menu
-  var ouvrierList = [    
-    'Femme / Homme de ménage',
-    'Cuisinier',
-    'Electricien',
-    'Plombier',
-    'Jardinier',
-    'Nounou',
-    'Menuisier',
-    'Courtier',
-    'Chauffeur',
-    'Gardien',
-    'Autres'
-  ];
-
-   var profileList = [    
+  var profileList = [    
+    '',
     "Recruteur",
     "Employé"
   ];
@@ -83,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
       setState(() {
         selectedDate = picked;
         String formatDate = DateFormat("dd-MMM-yyyy").format(selectedDate);
-        _selectedDOB = formatDate;
+        // _selectedDOB = formatDate;
       });
     }
   }
@@ -110,8 +93,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
 
   Future<void> _submit() async {
-    context.loaderOverlay.show();
-      try {
+    // context.loaderOverlay.show();
+    print('$_username.text, $_email.text, $_adresse.text, $profileValue,  $_isChecked, ');
+    try {
        final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
               email: _email.text,
               password: _password.text,
@@ -119,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
             FirebaseAuth.instance
               .authStateChanges()
               .listen((User? user) async {
-                context.loaderOverlay.hide();
+                // context.loaderOverlay.hide();
 
                 if (user == null) {
                   print('User is currently signed out!');
@@ -131,9 +115,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     "email": _email.text.trim(),
                     "adresse": _adresse.text,
                     "profile": profileValue,
-                    "categorie": cotegorieValue,
-                    "description": _description.text,
-                    "phone": phone.text.trim()
+                    "phone": phone.text.trim(),
+                    'date': DateFormat("dd-MMM-yyyy").format(DateTime.now())
                   });
                   Navigator.pushNamed(context,  '/login');
                 }
@@ -165,9 +148,14 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
 
-    // DatabaseReference _databaseRef = FirebaseDatabase.instance.ref().child('profiles');
     var size = MediaQuery.of(context).size;
     User? user = FirebaseAuth.instance.currentUser;
+    assert(_username != null, '');
+    assert(_isChecked != null, false);
+    assert(_email != null, '');
+    assert(_adresse != null, '');
+    assert(_password != null, '');
+    assert(phone != null, '');
 
     return Form(
       key: _formkey,
@@ -384,101 +372,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                  border: Border.all(color: Colors.brown),
-                  borderRadius:
-                  const BorderRadius.all(Radius.circular(10))),
-                  width: size.width,
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  height: 50,
-                  child: Stack(
-                    children: [ 
-                      const Text("Selectionner votre métier", style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFBB8547),
-                        ), // adjust your title as you required
-                      ),
-                      DropdownButton(
-                        isExpanded: true,
-                        iconSize: 15,
-                          hint: Text(
-                            cotegorieValue,
-                            style: const TextStyle(
-                              fontSize: 1, 
-                              color: Colors.brown,
-                              height: 2.0
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        underline: Container(
-                            child: const Column(
-                              // children: [
-                              //   Divider(
-                              //       thickness: 1,
-                              //       color: const Color(0xFFa5a5a5))
-                              // ],
-                            )),
-                        value: cotegorieValue,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: ouvrierList.map((String items) {
-                          return DropdownMenuItem(
-                              value: items,
-                              child: Text(
-                                items,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFFa5a5a5),
-                                ),
-                              ));
-                        }).toList(),
-                        onChanged: (newValue) {
-                          setState(() {
-                              cotegorieValue = newValue.toString();
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: _description,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Description";
-                    }
-                    return null;
-                  },
-                  style: const TextStyle(
-                      fontSize: 18,
-                      fontStyle: FontStyle.normal,
-                      color: Colors.brown),
-                  decoration: InputDecoration(
-                      errorStyle: const TextStyle(
-                          fontSize: 10,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.red),
-                      labelText: "Description",
-                      prefixIcon: const Icon(Icons.description_rounded, color: Color(0xFFBB8547),),
-                      labelStyle: const TextStyle(
-                          fontSize: 18,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.brown),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.brown, width: 1),
-                          borderRadius: BorderRadius.circular(10)),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
                 TextFormField(
                   obscureText: true,
                   controller: _password,
@@ -594,24 +487,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Container(
                   width: size.width,
-                  height: 40,
+                  height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (_formkey.currentState!.validate()) {
-                         if (_selectedDOB == "Date de naissance") {
-                          toastMessage("Choix de la date de naissance");
-                        } else if (!_isChecked) {
-                        toastMessage("Merci de valider les Conditions d'Utilisation ");
-                      } else {}
-                      }
-                    },
+                    onPressed: () {},
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.brown),
                     child: Container(
                           width: 350.0,
-                          height: 70,
+                          height: 80,
                           padding: const EdgeInsets.only(
-                              left: 30.0, right: 30.0, top: 0.0, bottom:                                                                                                                                                                                          0.0),
+                              left: 30.0, right: 30.0, top: 0.0, bottom: 0.0),
                           child: FilledButton(
                             onPressed: _submit,
                             child: const Text(
