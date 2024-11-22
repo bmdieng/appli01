@@ -65,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        String formatDate = DateFormat("dd-MMM-yyyy").format(selectedDate);
+        String formatDate = DateFormat("dd-MMM-yyyy  HH:mm").format(selectedDate);
         // _selectedDOB = formatDate;
       });
     }
@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     "adresse": _adresse.text,
                     "profile": profileValue,
                     "phone": phone.text.trim(),
-                    'date': DateFormat("dd-MMM-yyyy").format(DateTime.now())
+                    'date': DateFormat("dd-MMM-yyyy HH:mm").format(DateTime.now())
                   });
                   Navigator.pushNamed(context,  '/login');
                 }

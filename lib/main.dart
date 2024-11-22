@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:ligueypro/pages/aide.dart';
+import 'package:ligueypro/pages/annonce.dart';
 import 'package:ligueypro/pages/apropos.dart';
 import 'package:ligueypro/pages/charte.dart';
 import 'package:ligueypro/pages/home_page.dart';
 import 'package:ligueypro/pages/login.dart';
+import 'package:ligueypro/pages/professionnel.dart';
 import 'package:ligueypro/pages/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ligueypro/pages/register.dart';
@@ -39,8 +41,8 @@ class MyApp extends StatelessWidget{
         '/register' : (context) => const RegisterPage(),
         '/profile' : (context) => const ProfilePage(),
         '/apropos' : (context) => const AproposPage(),
-        '/annonce' : (context) => const LoginPage(),
-        '/offre' : (context) => const LoginPage(),
+        '/annonce' : (context) => const AnnoncePage(),
+        '/offre' : (context) => const ProfessionalPage(),
         '/charte' : (context) => const ChartePage(),
         '/login' : (context) => const LoginPage(),
         '/aide' : (context) => const AidePage(),

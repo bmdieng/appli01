@@ -76,11 +76,18 @@ class LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _submit() async {
+     showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
       try {
            final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
            email: _email,
             password: _password
           );
+          // Hide the loader
+          Navigator.of(context).pop();  
 
           if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
@@ -91,6 +98,8 @@ class LoginPageState extends State<LoginPage> {
             }
         } on FirebaseAuthException catch (e) {
           // String msg = AuthExceptionHandler.generateErrorMessage(e.code);
+          // Hide the loader
+          Navigator.of(context).pop();
           showDialog(
               context: context,
               builder: (BuildContext context) {

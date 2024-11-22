@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ligueypro/constants/constants.dart';
 
 class AproposPage extends StatelessWidget{
   const AproposPage({super.key});

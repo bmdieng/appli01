@@ -42,9 +42,16 @@ class ProfilePageState extends State<ProfilePage>{
   }
   
   Future<void> loadUserData() async {
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   builder: (context) => const Center(child: CircularProgressIndicator()),
+    // );
     FirebaseAuth.instance
             .authStateChanges()
             .listen((User? user) async {
+              // Hide the loader
+              // Navigator.of(context).pop(); 
                 if (user == null) {
                   print('User is currently signed out!');
                 } else {
