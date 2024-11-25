@@ -21,12 +21,12 @@ class LoginPageState extends State<LoginPage> {
       return 'Ce champ ne peut pas être vide.';
     }
     if (email.length < 4) {
-      return 'Too short';
+      return 'Adresse trop courte';
     }
     if (!RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(email)) {
-      return 'Adresse e-mail ou mot de passe invalide. Veuillez réessayer.';
+      return 'Adresse e-mail non conforme.';
     }
     // return null if the text is valid
     return null;

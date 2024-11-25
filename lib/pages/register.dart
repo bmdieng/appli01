@@ -377,7 +377,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _password,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Entrer Password";
+                      return "Entrer votre mot de passe";
                     } else if (value.length < 7) {
                       return "Votre mot de passe doit comporter un minimum de 6 caractères.";
                     }
@@ -413,7 +413,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Confirmer Password";
+                      return "Confirmer mot de passe";
                     } else if (value.length < 7) {
                       return "Votre mot de passe doit comporter un minimum de 6 caractères.";
                     } else if (value != _password.text) {
