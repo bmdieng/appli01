@@ -191,6 +191,9 @@ class AuthExceptionHandler {
       case "invalid-email":
         errorMessage = "Votre adresse e-mail semble être mal formée.";
         break;
+      case "invalid-credential":
+        errorMessage = "Adresse e-mail ou mot de passe erroné!";
+        break;
       case "weak-password":
         errorMessage =
             "Votre mot de passe doit comporter au moins 6 caractères.";

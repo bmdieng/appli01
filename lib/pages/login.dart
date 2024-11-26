@@ -24,7 +24,7 @@ class LoginPageState extends State<LoginPage> {
       return 'Adresse trop courte';
     }
     if (!RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(email)) {
       return 'Adresse e-mail non conforme.';
     }
@@ -43,16 +43,15 @@ class LoginPageState extends State<LoginPage> {
     return null;
   }
 
-
-  showToast(message){
+  showToast(message) {
     Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.SNACKBAR,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 18.0,
-      );
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.SNACKBAR,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 18.0,
+    );
   }
 
   showAlertDialog(BuildContext context) {
@@ -61,7 +60,8 @@ class LoginPageState extends State<LoginPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text(appName),
-          content: const Text("Votre identifiant ou mot de passe est incorrect. Merci de réessayer."),
+          content: const Text(
+              "Votre identifiant ou mot de passe est incorrect. Merci de réessayer."),
           actions: [
             TextButton(
               onPressed: () {
@@ -76,50 +76,46 @@ class LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _submit() async {
-     showDialog(
+    showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => const Center(child: CircularProgressIndicator()),
     );
-      try {
-           final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-           email: _email,
-            password: _password
+    try {
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: _email, password: _password);
+      // Hide the loader
+      Navigator.of(context).pop();
+
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Bienvenue ! Vous êtes connecté.')),
+        );
+        Navigator.pushNamed(context, '/');
+      }
+    } on FirebaseAuthException catch (e) {
+      // String msg = AuthExceptionHandler.generateErrorMessage(e.code);
+      // Hide the loader
+      Navigator.of(context).pop();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text(appName),
+            content: Text(AuthExceptionHandler.generateErrorMessage(e.code)),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
           );
-          // Hide the loader
-          Navigator.of(context).pop();  
-
-          if (_formKey.currentState!.validate()) {
-              _formKey.currentState!.save();
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Bienvenue ! Vous êtes connecté.')),
-              );
-              Navigator.pushNamed(context,  '/');
-            }
-        } on FirebaseAuthException catch (e) {
-          // String msg = AuthExceptionHandler.generateErrorMessage(e.code);
-          // Hide the loader
-          Navigator.of(context).pop();
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text(appName),
-                  content: Text(AuthExceptionHandler.generateErrorMessage(e.code)),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
-            );
-        
-          }
-
+        },
+      );
+    }
   }
 
   @override
@@ -144,13 +140,12 @@ class LoginPageState extends State<LoginPage> {
               const Padding(
                 padding: const EdgeInsets.only(
                     top: 15.0, bottom: 5.0, left: 40.0, right: 40.0),
-                child: Text("Trouvez le bon expert, tout près de chez vous.", style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFBB8547)
-                ), 
-                textAlign: TextAlign.center
-                ),
+                child: Text("Trouvez le bon expert, tout près de chez vous.",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFBB8547)),
+                    textAlign: TextAlign.center),
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -160,7 +155,10 @@ class LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
-                    prefixIcon: Icon(Icons.email, color: Color(0xFFBB8547),),
+                    prefixIcon: Icon(
+                      Icons.email,
+                      color: Color(0xFFBB8547),
+                    ),
                     hintText: "Saisissez votre Email.",
                   ),
                   validator: validateEmail,
@@ -177,7 +175,8 @@ class LoginPageState extends State<LoginPage> {
                     border: const OutlineInputBorder(),
                     labelText: 'Password',
                     hintText: 'Saisissez votre mot de passe.',
-                    prefixIcon: const Icon(Icons.lock, color: Color(0xFFBB8547)),
+                    prefixIcon:
+                        const Icon(Icons.lock, color: Color(0xFFBB8547)),
                     suffixIcon: InkWell(
                       onTap: () {
                         setState(() {
@@ -198,7 +197,7 @@ class LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.only(right: 18.0),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context,  '/reset_password');
+                    Navigator.pushNamed(context, '/reset_password');
                     // _databaseRef.onValue.listen(
                     //   (event){
                     //     print('La valeur de profile : ${event.snapshot.value.toString()}');
@@ -225,8 +224,8 @@ class LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context,  '/register');
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
                 },
                 child: const Text(
                   'Créer un compte',

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ligueypro/pages/aide.dart';
 import 'package:ligueypro/pages/annonce.dart';
@@ -22,43 +21,38 @@ void main() async {
   runApp(const MyApp());
 }
 
-
-
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      theme: ThemeData(
-      colorSchemeSeed: const Color.fromARGB(255, 241, 234, 226)
-      ),
+    return MaterialApp(
+      theme:
+          ThemeData(colorSchemeSeed: const Color.fromARGB(255, 241, 234, 226)),
       // home: HomePage(),
       initialRoute: '/login',
       routes: {
-        '/' : (context) => const HomePage(),
-        '/register' : (context) => const RegisterPage(),
-        '/profile' : (context) => const ProfilePage(),
-        '/apropos' : (context) => const AproposPage(),
-        '/annonce' : (context) => const AnnoncePage(),
-        '/offre' : (context) => const ProfessionalPage(),
-        '/charte' : (context) => const ChartePage(),
-        '/login' : (context) => const LoginPage(),
-        '/aide' : (context) => const AidePage(),
-        '/reset_password' : (context) => const ResetPasswordPage()
+        '/': (context) => const HomePage(),
+        '/register': (context) => const RegisterPage(),
+        '/profile': (context) => const ProfilePage(),
+        '/apropos': (context) => const AproposPage(),
+        '/annonce': (context) => const AnnoncePage(),
+        '/offre': (context) => const ProfessionalPage(),
+        '/charte': (context) => const ChartePage(),
+        '/login': (context) => const LoginPage(),
+        '/aide': (context) => const AidePage(),
+        '/reset_password': (context) => const ResetPasswordPage()
       },
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en'), // English
-          Locale('fr'), // Francais
-        ],
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('fr'), // Francais
+      ],
     );
   }
 }
-
