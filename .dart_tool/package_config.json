@@ -194,6 +194,24 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "firebase_messaging",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging-15.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "firebase_messaging_platform_interface",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging_platform_interface-4.5.48",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "firebase_messaging_web",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.9.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///Users/macbookpro/Documents/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -614,7 +632,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-11-26T12:27:58.279214Z",
+  "generated": "2024-11-27T12:20:21.693277Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/macbookpro/Documents/flutter",

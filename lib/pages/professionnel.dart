@@ -16,8 +16,8 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
   // String  _selectedDOB = "Date de naissance";
   final _formkey = GlobalKey<FormState>();
   final TextEditingController _description = TextEditingController();
-  TextEditingController _username = TextEditingController();
-  TextEditingController _email = TextEditingController();
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _email = TextEditingController();
   final TextEditingController _adresse = TextEditingController();
   TextEditingController phone = TextEditingController();
   Map<dynamic, dynamic> userData = {};
@@ -147,6 +147,7 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
           await newRef.set(offerData);
           toastMessage(
               "Votre recherche d'emploi a été publiée avec succès. Elle sera visible dés qu'elle sera validée par les administrateurs!");
+          // Trigger notification here
           Navigator.pushNamed(context, '/');
         } on FirebaseAuthException catch (e) {
           print(
@@ -226,78 +227,78 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      controller: _email,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Email";
-                        } else if (!validateEmail(value)) {
-                          return "Adresse email invalide.";
-                        }
-                        return null;
-                      },
-                      style: const TextStyle(
-                          fontSize: 18,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.brown),
-                      decoration: InputDecoration(
-                          errorStyle: const TextStyle(
-                              fontSize: 10,
-                              fontStyle: FontStyle.normal,
-                              color: Colors.red),
-                          labelText: "Email",
-                          prefixIcon: const Icon(
-                            Icons.email_rounded,
-                            color: Color(0xFFBB8547),
-                          ),
-                          labelStyle: const TextStyle(
-                              fontSize: 18,
-                              fontStyle: FontStyle.normal,
-                              color: Colors.brown),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.brown, width: 1),
-                              borderRadius: BorderRadius.circular(10)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      controller: phone,
-                      keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "numéro de tel";
-                        }
-                        return null;
-                      },
-                      style: const TextStyle(
-                          fontSize: 18,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.brown),
-                      decoration: InputDecoration(
-                          errorStyle: const TextStyle(
-                              fontSize: 10,
-                              fontStyle: FontStyle.normal,
-                              color: Colors.red),
-                          labelText: "Téléphone",
-                          prefixIcon: const Icon(
-                            Icons.call_end_rounded,
-                            color: Color(0xFFBB8547),
-                          ),
-                          labelStyle: const TextStyle(
-                              fontSize: 18,
-                              fontStyle: FontStyle.normal,
-                              color: Colors.brown),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.brown, width: 1),
-                              borderRadius: BorderRadius.circular(10)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
+                    // TextFormField(
+                    //   controller: _email,
+                    //   validator: (value) {
+                    //     if (value == null || value.isEmpty) {
+                    //       return "Email";
+                    //     } else if (!validateEmail(value)) {
+                    //       return "Adresse email invalide.";
+                    //     }
+                    //     return null;
+                    //   },
+                    //   style: const TextStyle(
+                    //       fontSize: 18,
+                    //       fontStyle: FontStyle.normal,
+                    //       color: Colors.brown),
+                    //   decoration: InputDecoration(
+                    //       errorStyle: const TextStyle(
+                    //           fontSize: 10,
+                    //           fontStyle: FontStyle.normal,
+                    //           color: Colors.red),
+                    //       labelText: "Email",
+                    //       prefixIcon: const Icon(
+                    //         Icons.email_rounded,
+                    //         color: Color(0xFFBB8547),
+                    //       ),
+                    //       labelStyle: const TextStyle(
+                    //           fontSize: 18,
+                    //           fontStyle: FontStyle.normal,
+                    //           color: Colors.brown),
+                    //       enabledBorder: OutlineInputBorder(
+                    //           borderSide: const BorderSide(
+                    //               color: Colors.brown, width: 1),
+                    //           borderRadius: BorderRadius.circular(10)),
+                    //       border: OutlineInputBorder(
+                    //           borderRadius: BorderRadius.circular(10))),
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    // TextFormField(
+                    //   controller: phone,
+                    //   keyboardType: TextInputType.phone,
+                    //   validator: (value) {
+                    //     if (value == null || value.isEmpty) {
+                    //       return "numéro de tel";
+                    //     }
+                    //     return null;
+                    //   },
+                    //   style: const TextStyle(
+                    //       fontSize: 18,
+                    //       fontStyle: FontStyle.normal,
+                    //       color: Colors.brown),
+                    //   decoration: InputDecoration(
+                    //       errorStyle: const TextStyle(
+                    //           fontSize: 10,
+                    //           fontStyle: FontStyle.normal,
+                    //           color: Colors.red),
+                    //       labelText: "Téléphone",
+                    //       prefixIcon: const Icon(
+                    //         Icons.call_end_rounded,
+                    //         color: Color(0xFFBB8547),
+                    //       ),
+                    //       labelStyle: const TextStyle(
+                    //           fontSize: 18,
+                    //           fontStyle: FontStyle.normal,
+                    //           color: Colors.brown),
+                    //       enabledBorder: OutlineInputBorder(
+                    //           borderSide: const BorderSide(
+                    //               color: Colors.brown, width: 1),
+                    //           borderRadius: BorderRadius.circular(10)),
+                    //       border: OutlineInputBorder(
+                    //           borderRadius: BorderRadius.circular(10))),
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -535,10 +536,9 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
         FirebaseDatabase.instance.ref("profiles/${user.uid}");
     DatabaseEvent event = await ref.once();
     userData = event.snapshot.value as Map<dynamic, dynamic>;
-    // print("----------------------- $userData");
     setState(() {
       _username.text = userData['name'];
-      _adresse.text = userData['adresse'];
+      // _adresse.text = userData['adresse'];
       phone.text = userData['phone'];
       _email.text = userData['email'];
     });

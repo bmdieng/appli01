@@ -26,12 +26,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     try {
       await auth.sendPasswordResetEmail(email: _emailController.text.trim());
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Un lien de réinitialisation du mot de passe a été envoyé à votre adresse adresse e-mail!")),
+        const SnackBar(
+            content: Text(
+                "Un lien de réinitialisation du mot de passe a été envoyé à votre adresse adresse e-mail!")),
       );
-      Navigator.pushNamed(context,  '/login');
+      Navigator.pushNamed(context, '/login');
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AuthExceptionHandler.generateErrorMessage(e.code))),
+        SnackBar(
+            content: Text(AuthExceptionHandler.generateErrorMessage(e.code))),
       );
     }
   }
@@ -40,9 +43,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: ListView(
-        children: [
-          Container(
+        body: ListView(children: [
+      Container(
         width: size.width,
         height: size.height,
         color: const Color.fromARGB(255, 241, 234, 226),
@@ -56,10 +58,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               children: [
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: const Icon(Icons.close, color: Color(0xFFBB8547), size: 30.0,),
+                  child: const Icon(
+                    Icons.close,
+                    color: Color(0xFFBB8547),
+                    size: 30.0,
+                  ),
                 ),
                 const SizedBox(height: 10),
-                 Center(
+                Center(
                   child: SizedBox(
                       width: 230,
                       height: 100,
@@ -128,7 +134,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: (size.height/2.8)),
+                SizedBox(height: (size.height / 2.8)),
                 // const Expanded(child: SizedBox()),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 20,
@@ -160,8 +166,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           ),
         ),
       ),
-        ]
-      )
-    );
+    ]));
   }
 }

@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:ligueypro/constants/constants.dart';
 import 'package:intl/intl.dart';
+import 'package:ligueypro/constants/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,57 +15,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int pageIndex = 0;
   late final TabController tabController;
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
-  Map<dynamic, dynamic> userData = {};
-  String name = '';
-  String profile = '';
-  String call = '';
-  String email = '';
-  String address = '';
-  String date = '';
-  String description = '';
-  String search_Offer = '';
-  List<dynamic> _offerList = [];
+  final List<dynamic> _offerList = [];
+  final List<dynamic> _annonceList = [];
 
   @override
   void initState() {
     super.initState();
-    // User? user = FirebaseAuth.instance.currentUser;
-    _fetchOfferData();
     tabController = TabController(length: 2, vsync: this);
-  }
-
-  void _fetchOfferData() {
-    _database.child('offres_emploi').onValue.listen((event) {
-      final data = event.snapshot.value as Map?;
-      // Get the current date and time, and subtract 30 days from it
-      DateTime now = DateTime.now();
-      DateTime thirtyDaysAgo = now.subtract(Duration(days: 30));
-
-      // Convert to timestamp for comparison
-      int timestamp = thirtyDaysAgo.millisecondsSinceEpoch;
-      DateFormat dateFormat = DateFormat("dd-MMM-yyyy HH:mm");
-      if (data != null) {
-        // Convert the data into a List
-        setState(() {
-          data.forEach((key, value) {
-            // Parse the string into a DateTime object
-            DateTime parsedDate = dateFormat.parse(value['date_pub']);
-
-            // Convert the DateTime to a timestamp (milliseconds since epoch)
-            int timestampDatePub = parsedDate.millisecondsSinceEpoch;
-            if (timestampDatePub != null && timestampDatePub >= timestamp) {
-              _offerList.add(value);
-            }
-          });
-          // print('****************** $_offerList');
-          _offerList.sort((a, b) {
-            String timestampA = a['date_pub']; // Assuming date is a timestamp
-            String timestampB = b['date_pub'];
-            return timestampB.compareTo(timestampA); // For descending order
-          });
-        });
-      } else {}
-    });
+    _fetchData('offres_emploi', _offerList);
+    _fetchData('offres_profile', _annonceList);
   }
 
   @override
@@ -75,364 +32,76 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // _fetchUserData(user!);
-    assert(tabController != null, '');
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 241, 234, 226),
-        foregroundColor: const Color(0xFF24353F),
-        title: Image.asset("assets/images/logo_transparent.png",
-            height: 55, width: 300),
-        elevation: 12,
-        actions: [
-          // IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
-        ],
-        bottom: TabBar(
-          controller:
-              tabController, // Assurez-vous que cette ligne est bien après `initState`.
-          tabs: const [
-            Text("Suivi Offres d’Emploi",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFBB8547)),
-                textAlign: TextAlign.center),
-            Text("Suivi de Candidatures ",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFBB8547)),
-                textAlign: TextAlign.center),
-          ],
-        ),
-      ),
-      body: TabBarView(
-        controller: tabController,
-        children: [
-          // Tab 1 Content
-          SingleChildScrollView(
-            child: _offerList.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: _offerList.length,
-                    itemBuilder: (context, index) {
-                      final item = _offerList[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0, // Adjust horizontal padding
-                          vertical: 2.0, // Adjust vertical padding
-                        ), // External margin
-                        child: ListTile(
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                color: Color(0xFFBB8547), width: 1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          leading: CircleAvatar(
-                            backgroundImage: item['profile'] == 'administrateur'
-                                ? const AssetImage('assets/images/person.png')
-                                : const AssetImage('assets/images/person.png'),
-                          ),
-                          title: Text(
-                            item['name'],
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFBB8547),
-                            ),
-                          ),
-                          subtitle: Text.rich(
-                            TextSpan(
-                              text:
-                                  'Profile: ${item['search_Offer']} \n', // Default text
-                              style: const TextStyle(
-                                  fontSize: 12.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: '${item['description']}.',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                // TextSpan(
-                                //   text:
-                                //       '\nAdresse: ${item['adresse']} \nDate publication: ${item['date_pub']}',
-                                //   style: const TextStyle(
-                                //       fontSize: 12.0,
-                                //       fontWeight: FontWeight.normal),
-                                // ),
-                              ],
-                            ),
-                          ),
-                          trailing: Icon(
-                            Icons.circle_rounded,
-                            color: item['etat'] ? Colors.green : Colors.red,
-                          ),
-                          onTap: () {
-                            _showModal(context, item!);
-                          },
-                        ),
-                      );
-                    },
-                  ),
-          ),
+  void _fetchData(String path, List<dynamic> targetList) {
+    _database.child(path).onValue.listen((event) {
+      final data = event.snapshot.value as Map?;
+      if (data == null) return;
 
-          // Tab 2 Content
-          SingleChildScrollView(
-            child: Column(
-              children: List.generate(
-                30,
-                (index) => ListTile(
-                  contentPadding: const EdgeInsets.all(10),
-                  leading: const CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/engineer.png'),
-                  ),
-                  title: const Text('Abdou DIOP '),
-                  subtitle: const Text(
-                      "Plombier professionnel\nDate publication: 21-nov-2024 12h30"),
-                  trailing: const Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    print('ListTile tapped');
-                  },
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      drawer: Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: Colors.transparent,
-            primaryColor: Colors.transparent,
-          ),
-          child: Drawer(
-            child: ListView(
-              children: [
-                DrawerHeader(
-                  child: Image.asset(
-                    'assets/images/logo_transparent.png',
-                    width: 400,
-                    height: 200,
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.home,
-                    color: Color(0xFFBB8547),
-                  ),
-                  title: const Text('Accueil',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547))),
-                  trailing: const Icon(
-                    Icons.chevron_right_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/');
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.person,
-                    color: Color(0xFFBB8547),
-                  ),
-                  trailing: const Icon(
-                    Icons.chevron_right_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  title: const Text('Profile',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547))),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/profile');
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.edit_document,
-                    color: Color(0xFFBB8547),
-                  ),
-                  trailing: const Icon(
-                    Icons.chevron_right_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  title: const Text('Poster Offres d’Emploi ',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547))),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/offre');
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.edit_note_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  trailing: const Icon(
-                    Icons.chevron_right_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  title: const Text('Proposer mes services',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547))),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/annonce');
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.account_circle,
-                    color: Color(0xFFBB8547),
-                  ),
-                  trailing: const Icon(
-                    Icons.chevron_right_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  title: const Text('Nos Services',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547))),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/services');
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.help,
-                    color: Color(0xFFBB8547),
-                  ),
-                  trailing: const Icon(
-                    Icons.chevron_right_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  title: const Text('Aide et Assistance',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547))),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/aide');
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.file_present,
-                    color: Color(0xFFBB8547),
-                  ),
-                  trailing: const Icon(
-                    Icons.chevron_right_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  title: const Text('Charte',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547))),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/charte');
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.logout,
-                    color: Color(0xFFBB8547),
-                  ),
-                  trailing: const Icon(
-                    Icons.chevron_right_rounded,
-                    color: Color(0xFFBB8547),
-                  ),
-                  title: const Text('Se Déconnecter',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547))),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/login');
-                  },
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  verticalDirection: VerticalDirection.down,
-                  children: [
-                    SizedBox(height: 230),
-                    Text("Version $appVersion  ",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547),
-                        ))
-                  ],
-                ),
-              ],
-            ),
-          )),
-    );
+      final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 30));
+      final timestampThreshold = thirtyDaysAgo.millisecondsSinceEpoch;
+      final dateFormat = DateFormat("dd-MMM-yyyy HH:mm");
+
+      setState(() {
+        targetList.clear();
+        data.forEach((key, value) {
+          final datePub = dateFormat.parse(value['date_pub']);
+          if (datePub.millisecondsSinceEpoch >= timestampThreshold &&
+              value['etat']) {
+            targetList.add(value);
+          }
+        });
+        targetList.sort((a, b) => b['date_pub'].compareTo(a['date_pub']));
+      });
+    });
   }
 
-  void _showModal(BuildContext context, var item) {
+  void _showModal(BuildContext context, dynamic item) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.white,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              buildCard(
-                  imageUrl:
-                      'assets/images/person.png', // Replace with your image URL
-                  title: item['name'],
-                  subtitle:
-                      'Profile recherché: ${item['search_Offer']} \n${item['description']} \nAdresse: ${item['adresse']}. \nTéléphone: ${item['phone']}. \nDate publication: ${item['date_pub']} \nStatut: ${item['etat'] == true ? 'actif' : 'désactivé'}',
-                  rate: item['rate'],
-                  phone: item['phone']),
-            ],
-          ),
-        );
-      },
+      builder: (_) => _buildModalContent(item),
     );
   }
 
-  Widget buildCard(
+  Widget _buildModalContent(dynamic item) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildCard(
+            imageUrl: item['profile'] == 'Recruteur'
+                ? 'assets/images/person.png'
+                : 'assets/images/engineer.png',
+            title: item['name'],
+            subtitle:
+                'Profile: ${item['search_Offer']}\n${item['description']}\nDate: ${item['date_pub']}\nStatus: ${item['etat'] ? 'Active' : 'Inactive'}',
+            rate: item['rate'] ?? 0,
+            phone: item['phone'],
+            profile: item['profile'],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCard(
       {required String imageUrl,
       required String title,
       required String subtitle,
       required int rate,
-      required String phone}) {
+      required String phone,
+      required String profile}) {
     return Card(
       color: Colors.white,
       elevation: 1.0,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.zero, //circular(12.0),
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
-            borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(12.0)),
-            child: Image.asset(
-              imageUrl,
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.contain,
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+            child: Image.asset(imageUrl, height: 200, fit: BoxFit.contain),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -450,29 +119,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 const SizedBox(height: 8),
                 Text(
                   subtitle,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[700],
+                  style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                ),
+                const SizedBox(height: 8),
+                if (profile != 'Recruteur') // Conditionally show the Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(5, (index) {
+                      return Icon(
+                        index < rate ? Icons.star : Icons.star_border,
+                        color: Colors.yellow,
+                      );
+                    }),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(5, (index) {
-                    return Icon(
-                      index < rate ? Icons.star : Icons.star_border,
-                      color: Colors.yellow,
-                    );
-                  }),
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                  children: [
                     IconButton(
                       icon: const Icon(Icons.call, color: Color(0xFFBB8547)),
-                      onPressed: () {
-                        _launchDialer(phone);
-                      },
-                      tooltip: 'Appeler',
+                      onPressed: () => _launchDialer(phone),
+                      tooltip: 'Call',
                     ),
                   ],
                 ),
@@ -484,10 +150,198 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  // Function to launch dialer
   void _launchDialer(String phoneNumber) async {
-    print(phoneNumber);
-    // ignore: deprecated_member_use
-    launch('tel:+221${phoneNumber}');
+    final url = 'tel:+221$phoneNumber';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Widget _buildList(List<dynamic> items) {
+    return SingleChildScrollView(
+      child: items.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 5.0, vertical: 2.0),
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      side:
+                          const BorderSide(color: Color(0xFFBB8547), width: 1),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    leading: CircleAvatar(
+                      backgroundImage: AssetImage(
+                          (item['profile'] == 'Recruteur' ||
+                                  item['profile'] == 'administrateur')
+                              ? 'assets/images/person.png'
+                              : 'assets/images/engineer.png'),
+                    ),
+                    title: Text(
+                      item['name'],
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFBB8547),
+                      ),
+                    ),
+                    subtitle: Text(
+                      'Profile: ${item['search_Offer']}\n${item['description']}',
+                      style: const TextStyle(fontSize: 12.0),
+                    ),
+                    trailing: Icon(
+                      Icons.circle_rounded,
+                      color: item['etat'] ? Colors.green : Colors.red,
+                    ),
+                    onTap: () => _showModal(context, item),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Image.asset("assets/images/logo_transparent.png",
+            height: 55, width: 300),
+        bottom: TabBar(
+          controller: tabController,
+          tabs: const [
+            Tab(text: "Suivi Offres d’Emploi"),
+            Tab(text: "Suivi de Candidatures"),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          _buildList(_offerList),
+          _buildList(_annonceList),
+        ],
+      ),
+      drawer: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.transparent,
+          primaryColor: Colors.transparent,
+        ),
+        child: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Image.asset(
+                  'assets/images/logo_transparent.png',
+                  width: 400,
+                  height: 200,
+                ),
+              ),
+              // Function to create ListTile
+              _buildDrawerItem(
+                context,
+                icon: Icons.home,
+                label: 'Accueil',
+                routeName: '/',
+              ),
+              _buildDrawerItem(
+                context,
+                icon: Icons.person,
+                label: 'Profile',
+                routeName: '/profile',
+              ),
+              _buildDrawerItem(
+                context,
+                icon: Icons.edit_document,
+                label: 'Poster Offres d’Emploi',
+                routeName: '/offre',
+              ),
+              _buildDrawerItem(
+                context,
+                icon: Icons.edit_note_rounded,
+                label: 'Proposer mes services',
+                routeName: '/annonce',
+              ),
+              _buildDrawerItem(
+                context,
+                icon: Icons.account_circle,
+                label: 'Nos Services',
+                routeName: '/services',
+              ),
+              _buildDrawerItem(
+                context,
+                icon: Icons.help,
+                label: 'Aide et Assistance',
+                routeName: '/aide',
+              ),
+              _buildDrawerItem(
+                context,
+                icon: Icons.file_present,
+                label: 'Charte',
+                routeName: '/charte',
+              ),
+              _buildDrawerItem(
+                context,
+                icon: Icons.logout,
+                label: 'Se Déconnecter',
+                routeName: '/login',
+              ),
+              const Padding(
+                padding: EdgeInsets.only(right: 16.0, top: 16.0),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    "Version $appVersion",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFBB8547),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+// Helper function
+  Widget _buildDrawerItem(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required String routeName,
+  }) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: const Color(0xFFBB8547),
+      ),
+      trailing: const Icon(
+        Icons.chevron_right_rounded,
+        color: Color(0xFFBB8547),
+      ),
+      title: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFFBB8547),
+        ),
+      ),
+      onTap: () {
+        Navigator.pushNamed(context, routeName);
+      },
+    );
   }
 }

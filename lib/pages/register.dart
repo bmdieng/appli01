@@ -137,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
           );
         },
       );
+      Navigator.of(context).pop();
     }
   }
 
@@ -513,7 +514,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             padding: const EdgeInsets.only(
                                 left: 30.0, right: 30.0, top: 0.0, bottom: 0.0),
                             child: FilledButton(
-                              onPressed: _submit,
+                              onPressed: (_username.text.isNotEmpty &&
+                                      _email.text.isNotEmpty &&
+                                      _adresse.text.isNotEmpty &&
+                                      _password.text.isNotEmpty &&
+                                      _cpassword.text.isNotEmpty)
+                                  ? _submit
+                                  : null,
                               child: const Text(
                                 "S'inscrire",
                                 style: TextStyle(
