@@ -92,6 +92,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       required int rate,
       required String phone,
       required String profile}) {
+    int _rating = 0; // Current rating
+    void _rate(int newRating) {
+      setState(() {
+        _rating = newRating; // Update the state
+      });
+    }
+
     return Card(
       color: Colors.white,
       elevation: 1.0,
@@ -126,9 +133,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(5, (index) {
-                      return Icon(
-                        index < rate ? Icons.star : Icons.star_border,
-                        color: Colors.yellow,
+                      return IconButton(
+                        icon: Icon(
+                          index < _rating ? Icons.star : Icons.star_border,
+                          color: Colors.yellow,
+                        ),
+                        onPressed: () => _rate(index + 1), // Update rating
                       );
                     }),
                   ),
@@ -155,7 +165,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      throw "Impossible d'appeler  $url";
     }
   }
 
@@ -193,10 +203,55 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         color: Color(0xFFBB8547),
                       ),
                     ),
-                    subtitle: Text(
-                      'Profile: ${item['search_Offer']}\n${item['description']}',
-                      style: const TextStyle(fontSize: 12.0),
+                    subtitle: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600),
+                                  text: item['profile'] == 'Recruteur'
+                                      ? 'Profile recherché: '
+                                      : 'Profile: '),
+                              TextSpan(
+                                text: item['search_Offer'] + '\n',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    color: Colors.black),
+                              ),
+                              TextSpan(
+                                text: item['description'],
+                                style: const TextStyle(fontSize: 15),
+                              ),
+                            ],
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        const SizedBox(height: 10),
+                        if (item['profile'] != 'Recruteur')
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(5, (index) {
+                              int rate = 0; // Set your rating here
+                              return Icon(
+                                index < rate ? Icons.star : Icons.star_border,
+                                color: Color(0xFFBB8547),
+                              );
+                            }),
+                          ),
+                      ],
                     ),
+                    // Text(
+                    //   item['profile'] == 'Recruteur'
+                    //       ? 'Profile recherché: ${item['search_Offer']}\n${item['description']} '
+                    //       : 'Profile: ${item['search_Offer']}\n${item['description']}',
+                    //   style: const TextStyle(fontSize: 12.0),
+                    // ),
                     trailing: Icon(
                       Icons.circle_rounded,
                       color: item['etat'] ? Colors.green : Colors.red,
@@ -218,8 +273,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         bottom: TabBar(
           controller: tabController,
           tabs: const [
-            Tab(text: "Suivi Offres d’Emploi"),
-            Tab(text: "Suivi de Candidatures"),
+            Text("Suivi Offres d’Emploi",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFBB8547)),
+                textAlign: TextAlign.center),
+            Text("Suivi de Candidatures ",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFBB8547)),
+                textAlign: TextAlign.center),
           ],
         ),
       ),
