@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 const Color kBackgroundColor = Color(0xFFD4DEF7);
 const String appName = "LigueyPro";
-const String appVersion = "1.0";
+const String appOwner = 'By DigitPrest Consulting';
+const String appVersion = "1.0.0";
+const String ownerContact = '221777200226';
 const Color kTextColor = Color(0xFF4879C5);
 const Color kButtonColor = Color(0xFFBB8547);
 const InputDecoration kTextInputDecoration = InputDecoration(
@@ -13,6 +15,28 @@ const InputDecoration kTextInputDecoration = InputDecoration(
   hintText: '',
   // ),
 );
+
+const appChatWhatsapp = """Bonjour LigueyPro,\n 
+je vous contact pour avoir des informations sur l'application.""";
+
+const avisSuggestion = """Votre avis compte !
+
+Nous sommes constamment à la recherche de moyens pour améliorer notre plateforme et offrir une expérience optimale tant pour les recruteurs que pour les candidats. Si vous avez des retours, des suggestions ou si vous avez vécu une expérience exceptionnelle, nous serions ravis de le savoir !
+
+Partagez votre avis :
+
+Que vous soyez recruteur à la recherche de talents ou un employé à la recherche de nouvelles opportunités, votre opinion nous aide à perfectionner notre service. Dites-nous ce qui vous plaît, ce que nous pourrions améliorer et comment nous pourrions rendre notre plateforme encore plus efficace.
+
+Facilité d'utilisation : Comment trouvez-vous l'interface ? Est-elle claire et intuitive ?
+Qualité des correspondances : Avez-vous trouvé que les profils et les offres sont bien adaptés à vos attentes ?
+Temps de réponse : Avez-vous eu une réponse rapide de la part des recruteurs ou des candidats ?
+Améliorations possibles : Quelles fonctionnalités supplémentaires aimeriez-vous voir dans l'application ?
+Nous nous engageons à prendre en compte toutes vos suggestions pour améliorer notre service et nous faire grandir ensemble.
+
+Des questions ? Discutons directement sur WhatsApp !
+Si vous avez des questions immédiates ou souhaitez discuter plus en détail de vos suggestions, cliquez sur le bouton ci-dessous pour démarrer une conversation via WhatsApp. Nous sommes là pour vous aider !
+""";
+
 const termsAndConditions = """Conditions Générales d'Utilisation (CGU)
 1. Préambule
 Les présentes Conditions Générales d'Utilisation (ci-après "CGU") régissent l’utilisation de l’application Ligueyro  (ci-après "l’Application"), éditée par Digitrest Consulting.

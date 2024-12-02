@@ -49,5 +49,11 @@
 		<false/>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Vous devez activer votre geolocaloisation.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>We need your location for background tracking.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>We need your location at all times.</string>
 	</dict>
 </plist>

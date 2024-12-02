@@ -11,8 +11,6 @@ class ChartePage extends StatelessWidget {
             title: const Text("Conditions Générales d'Utilisation"),
             elevation: 12),
         body: ListView(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: SizedBox(

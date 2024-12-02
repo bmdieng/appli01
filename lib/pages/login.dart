@@ -121,119 +121,137 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 241, 234, 226), //Colors.white,
-      // appBar: AppBar(
-      //   title: const Text("Login Page"),
-      // ),
+      backgroundColor: const Color.fromARGB(255, 241, 234, 226),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 120.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              Center(
-                child: SizedBox(
-                    width: 230,
-                    height: 180,
-                    child: Image.asset('assets/images/logo_transparent.png')),
-              ),
-              const Padding(
-                padding: const EdgeInsets.only(
-                    top: 15.0, bottom: 5.0, left: 40.0, right: 40.0),
-                child: Text("Trouvez le bon expert, tout près de chez vous.",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFBB8547)),
-                    textAlign: TextAlign.center),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 15.0, bottom: 5.0, left: 30.0, right: 30.0),
-                child: TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    prefixIcon: Icon(
-                      Icons.email,
-                      color: Color(0xFFBB8547),
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 120.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        width: 230,
+                        height: 180,
+                        child:
+                            Image.asset('assets/images/logo_transparent.png'),
+                      ),
                     ),
-                    hintText: "Saisissez votre Email.",
-                  ),
-                  validator: validateEmail,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  onChanged: (text) => setState(() => _email = text),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 30.0, right: 30.0, top: 15, bottom: 10),
-                child: TextFormField(
-                  obscureText: passToggle,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Saisissez votre mot de passe.',
-                    prefixIcon:
-                        const Icon(Icons.lock, color: Color(0xFFBB8547)),
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          passToggle = !passToggle;
-                        });
+                    const Padding(
+                      padding: EdgeInsets.only(
+                          top: 15.0, bottom: 5.0, left: 40.0, right: 40.0),
+                      child: Text(
+                        "Trouvez le bon expert, tout près de chez vous.",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFBB8547)),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 15.0, bottom: 5.0, left: 30.0, right: 30.0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Email',
+                          prefixIcon: Icon(
+                            Icons.email,
+                            color: Color(0xFFBB8547),
+                          ),
+                          hintText: "Saisissez votre Email.",
+                        ),
+                        validator: validateEmail,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        onChanged: (text) => setState(() => _email = text),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, top: 15, bottom: 10),
+                      child: TextFormField(
+                        obscureText: passToggle,
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: 'Password',
+                          hintText: 'Saisissez votre mot de passe.',
+                          prefixIcon:
+                              const Icon(Icons.lock, color: Color(0xFFBB8547)),
+                          suffixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                passToggle = !passToggle;
+                              });
+                            },
+                            child: Icon(passToggle
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                          ),
+                        ),
+                        validator: validatePassword,
+                        onChanged: (text) => setState(() => _password = text),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.topRight,
+                      padding: const EdgeInsets.only(right: 18.0),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/reset_password');
+                        },
+                        child: const Text(
+                          'Mot de passe oublié ?',
+                          style: TextStyle(color: Colors.blue, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 350.0,
+                      height: 70,
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, top: 10.0, bottom: 10.0),
+                      child: FilledButton(
+                        onPressed: _email.isNotEmpty ? _submit : null,
+                        child: const Text(
+                          'Se connecter',
+                          style: TextStyle(color: Colors.white, fontSize: 22),
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/register');
                       },
-                      child: Icon(
-                          passToggle ? Icons.visibility : Icons.visibility_off),
+                      child: const Text(
+                        'Créer un compte',
+                        style: TextStyle(color: Colors.black, fontSize: 15),
+                      ),
                     ),
-                  ),
-                  validator: validatePassword,
-                  onChanged: (text) => setState(() => _password = text),
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  ],
                 ),
               ),
-              Container(
-                alignment: Alignment.topRight,
-                padding: const EdgeInsets.only(right: 18.0),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/reset_password');
-                    // _databaseRef.onValue.listen(
-                    //   (event){
-                    //     print('La valeur de profile : ${event.snapshot.value.toString()}');
-                    //   }
-                    // );
-                  },
-                  child: const Text(
-                    'Mot de passe oublié ?',
-                    style: TextStyle(color: Colors.blue, fontSize: 15),
-                  ),
-                ),
+            ),
+            const SizedBox(height: 150), // Add space before footer
+            // Footer Section
+            Container(
+              // color: const Color(0xFFBB8547), // Footer background color
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              alignment: Alignment.center,
+              child: const Text(
+                '$appOwner © 2024',
+                style: TextStyle(
+                    color: const Color(0xFFBB8547),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900),
+                textAlign: TextAlign.center,
               ),
-              Container(
-                width: 350.0,
-                height: 70,
-                padding: const EdgeInsets.only(
-                    left: 30.0, right: 30.0, top: 10.0, bottom: 10.0),
-                child: FilledButton(
-                  onPressed: _email.isNotEmpty ? _submit : null,
-                  child: const Text(
-                    'Se connecter',
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/register');
-                },
-                child: const Text(
-                  'Créer un compte',
-                  style: TextStyle(color: Colors.black, fontSize: 15),
-                ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
