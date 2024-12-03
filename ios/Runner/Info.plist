@@ -55,5 +55,16 @@
 		<string>We need your location for background tracking.</string>
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>We need your location at all times.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>We need your location to show nearby places.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>We need your location for map services.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>Your location is required for enhanced services.</string>
+		<key>io.flutter.embedded_views_preview</key>
+		<true/>
+		<key>GMSApiKey</key>
+		<string>AIzaSyAB2JMrNEZJbM8V0VwH-3QtNcB7HUg0_Zo</string>
+
 	</dict>
 </plist>

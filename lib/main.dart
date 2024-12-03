@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         '/aide': (context) => const AidePage(),
         '/reset_password': (context) => const ResetPasswordPage(),
         '/avis': (context) => AvisSuggestionPage(),
-        '/geoloc': (context) => LocationScreen()
+        '/geoloc': (context) => MapScreen()
       },
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
