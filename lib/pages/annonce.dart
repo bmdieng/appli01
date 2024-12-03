@@ -146,7 +146,7 @@ class _AnnoncePageState extends State<AnnoncePage> {
           await newRef.set(offerData);
           toastMessage(
               "Votre annonce a été publiée avec succès. Elle sera visible dés qu'elle sera validée par les administrateurs!");
-          Navigator.pushNamed(context, '/');
+          Navigator.pushNamed(context, '/home');
         } on FirebaseAuthException catch (e) {
           print(
               "Erreur insertion =========> ${AuthExceptionHandler.generateErrorMessage(e.code)}");

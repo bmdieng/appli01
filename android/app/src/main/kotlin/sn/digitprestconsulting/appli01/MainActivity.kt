@@ -1,4 +1,4 @@
-package sn.digitprestconsulting.appli01
+package sn.digitprestconsulting.ligueypro
 
 import io.flutter.embedding.android.FlutterActivity
 

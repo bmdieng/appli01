@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -340,6 +341,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFFBB8547),
         elevation: 12,
         title: Image.asset("assets/images/logo_transparent.png",
             height: 55, width: 300),
@@ -348,8 +350,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             constraints: const BoxConstraints(
               minWidth: 80, // Largeur minimale pour inclure un espace
             ),
-            icon: const Icon(Icons.location_on,
-                color: Color(0xFFBB8547), size: 24),
+            icon: const Icon(Icons.map_outlined, color: Colors.white, size: 24),
             onPressed: () {
               Navigator.pushNamed(context, '/geoloc');
             },
@@ -368,13 +369,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547)),
+                          color: Colors.white),
                       textAlign: TextAlign.center),
                   Text("Voir les Candidatures ",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFFBB8547)),
+                          color: Colors.white),
                       textAlign: TextAlign.center),
                 ],
               ),
@@ -385,7 +386,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     const Text(
                       "Rechercher un metier", // Label text
                       style: TextStyle(
-                        color: Color(0xFFBB8547),
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -410,10 +411,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         }).toList(),
                         hint: const Text(
                           "Sélectionner un métier", // This is the hint
-                          style: TextStyle(color: Color(0xFFBB8547)),
+                          style: TextStyle(color: Colors.white),
                         ),
                         icon: const Icon(Icons.arrow_drop_down,
-                            color: Color(0xFFBB8547)),
+                            color: Colors.white),
                         dropdownColor: Colors.white,
                         underline:
                             const SizedBox(), // Removes the default underline
@@ -452,7 +453,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     context,
                     icon: Icons.home,
                     label: 'Accueil',
-                    routeName: '/',
+                    routeName: '/home',
                   ),
                   _buildDrawerItem(
                     context,
@@ -494,7 +495,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     context,
                     icon: Icons.logout,
                     label: 'Se Déconnecter',
-                    routeName: '/login',
+                    routeName: '/',
                   ),
                 ],
               ),
@@ -557,9 +558,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
       ),
       onTap: () {
+        print(routeName);
+        if (routeName == '/') {
+          logout();
+        }
         Navigator.pushNamed(context, routeName);
       },
     );
+  }
+
+  Future<void> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      print('Déconnexion réussie');
+    } catch (e) {
+      print('Probleme de déconnexion $e');
+    }
   }
 
   showAlertDialog(BuildContext context, String msg) {

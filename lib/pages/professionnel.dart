@@ -148,7 +148,7 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
           toastMessage(
               "Votre recherche d'emploi a été publiée avec succès. Elle sera visible dés qu'elle sera validée par les administrateurs!");
           // Trigger notification here
-          Navigator.pushNamed(context, '/');
+          Navigator.pushNamed(context, '/home');
         } on FirebaseAuthException catch (e) {
           print(
               "Erreur insertion =========> ${AuthExceptionHandler.generateErrorMessage(e.code)}");

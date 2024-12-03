@@ -21,7 +21,7 @@ class AidePageState extends State<AidePage> {
               child: SizedBox(
                   width: 150,
                   height: 100,
-                  child: Image.asset('assets/images/colab1.png')),
+                  child: Image.asset('assets/images/logo_transparent.png')),
             ),
             const Padding(
               padding: EdgeInsets.all(16.0),

@@ -243,7 +243,7 @@
     },
     {
       "name": "flutter_native_splash",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/flutter_native_splash-2.4.2",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/flutter_native_splash-2.4.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -477,7 +477,7 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/path_provider_android-2.2.12",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/path_provider_android-2.2.14",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -579,7 +579,7 @@
     },
     {
       "name": "shared_preferences_android",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/shared_preferences_android-2.3.3",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/shared_preferences_android-2.3.4",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -776,10 +776,10 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-03T10:09:47.117365Z",
+  "generated": "2024-12-03T11:11:58.442194Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/macbookpro/Documents/flutter",
-  "flutterVersion": "3.24.4",
+  "flutterVersion": "3.24.5",
   "pubCache": "file:///Users/macbookpro/.pub-cache"
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:ligueypro/pages/aide.dart';
@@ -36,20 +37,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     return MaterialApp(
       theme:
           ThemeData(colorSchemeSeed: const Color.fromARGB(255, 241, 234, 226)),
       // home: HomePage(),
-      initialRoute: '/login',
+      initialRoute: user == null ? '/' : '/home',
       routes: {
-        '/': (context) => const HomePage(),
+        '/': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
         '/register': (context) => const RegisterPage(),
         '/profile': (context) => const ProfilePage(),
         '/apropos': (context) => const AproposPage(),
         '/annonce': (context) => const AnnoncePage(),
         '/offre': (context) => const ProfessionalPage(),
         '/charte': (context) => const ChartePage(),
-        '/login': (context) => const LoginPage(),
         '/aide': (context) => const AidePage(),
         '/reset_password': (context) => const ResetPasswordPage(),
         '/avis': (context) => AvisSuggestionPage(),

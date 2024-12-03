@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 const Color kBackgroundColor = Color(0xFFD4DEF7);
 const String appName = "LigueyPro";
-const String appOwner = 'By DigitPrest Consulting';
+const String appOwner = 'Application développée par DigitPrest Consulting';
 const String appVersion = "1.0.0";
 const String ownerContact = '221777200226';
 const Color kTextColor = Color(0xFF4879C5);
