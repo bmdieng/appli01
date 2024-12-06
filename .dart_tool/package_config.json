@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "_flutterfire_internals",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.3.46",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.3.47",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -141,73 +141,73 @@
     },
     {
       "name": "firebase_auth",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_auth-5.3.3",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_auth-5.3.4",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-7.4.9",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-7.4.10",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_auth_web-5.13.4",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_auth_web-5.13.5",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_core-3.8.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_core-3.8.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_core_platform_interface",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_core_platform_interface-5.3.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_core_platform_interface-5.3.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_core_web",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_core_web-2.18.1",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_core_web-2.18.2",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_database",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_database-11.1.6",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_database-11.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_database_platform_interface",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_database_platform_interface-0.2.5+46",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_database_platform_interface-0.2.5+47",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_database_web",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_database_web-0.2.6+4",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_database_web-0.2.6+5",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_messaging",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging-15.1.5",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging-15.1.6",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_messaging_platform_interface",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging_platform_interface-4.5.48",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging_platform_interface-4.5.49",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_messaging_web",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.9.4",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.9.5",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -225,15 +225,15 @@
     },
     {
       "name": "flutter_launcher_icons",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.14.1",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.14.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/flutter_lints-4.0.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.5"
     },
     {
       "name": "flutter_localizations",
@@ -356,6 +356,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "google_mobile_ads",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_mobile_ads-5.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "html",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/html-0.15.5",
       "packageUri": "lib/",
@@ -381,7 +387,7 @@
     },
     {
       "name": "info_popup",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/info_popup-3.0.6",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/info_popup-4.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -417,9 +423,9 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/lints-4.0.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/lints-5.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.5"
     },
     {
       "name": "loader_overlay",
@@ -429,7 +435,7 @@
     },
     {
       "name": "loading_overlay",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/loading_overlay-0.3.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/loading_overlay-0.4.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -483,9 +489,9 @@
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/path_provider_foundation-2.4.0",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/path_provider_foundation-2.4.1",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "path_provider_linux",
@@ -693,9 +699,9 @@
     },
     {
       "name": "url_launcher_ios",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_ios-6.3.1",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_ios-6.3.2",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "url_launcher_linux",
@@ -705,7 +711,7 @@
     },
     {
       "name": "url_launcher_macos",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_macos-3.2.1",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/url_launcher_macos-3.2.2",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -752,6 +758,30 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "webview_flutter",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/webview_flutter-4.9.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "webview_flutter_android",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/webview_flutter_android-3.16.9",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "webview_flutter_platform_interface",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/webview_flutter_platform_interface-2.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "webview_flutter_wkwebview",
+      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.16.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
       "name": "xdg_directories",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/xdg_directories-1.1.0",
       "packageUri": "lib/",
@@ -776,7 +806,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-03T11:11:58.442194Z",
+  "generated": "2024-12-06T10:12:22.616991Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/macbookpro/Documents/flutter",

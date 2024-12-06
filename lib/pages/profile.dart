@@ -48,6 +48,7 @@ class ProfilePageState extends State<ProfilePage> {
         // Hide the loader
         // Navigator.of(context).pop();
         if (user == null) {
+          // ignore: avoid_print
           print('User is currently signed out!');
         } else {
           // print('User is signed in ==> $user');
@@ -152,6 +153,7 @@ class ProfilePageState extends State<ProfilePage> {
 }
 
 class _TopPortion extends StatelessWidget {
+  // ignore: use_super_parameters
   const _TopPortion({Key? key}) : super(key: key);
 
   @override

@@ -25,13 +25,16 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Future<void> sendPasswordResetEmail() async {
     try {
       await auth.sendPasswordResetEmail(email: _emailController.text.trim());
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text(
                 "Un lien de réinitialisation du mot de passe a été envoyé à votre adresse adresse e-mail!")),
       );
+      // ignore: use_build_context_synchronously
       Navigator.pushNamed(context, '/login');
     } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content: Text(AuthExceptionHandler.generateErrorMessage(e.code))),
@@ -98,6 +101,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
+                // ignore: avoid_unnecessary_containers
                 Container(
                   child: TextFormField(
                     obscureText: false,

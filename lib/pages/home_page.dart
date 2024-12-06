@@ -38,8 +38,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
-    _fetchData('offres_emploi', _offerList, selectedValue!);
-    _fetchData('offres_profile', _annonceList, selectedValue!);
+    _fetchData('offres_emploi', _offerList, selectedValue);
+    _fetchData('offres_profile', _annonceList, selectedValue);
   }
 
   @override
@@ -343,6 +343,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       appBar: AppBar(
         backgroundColor: Color(0xFFBB8547),
         elevation: 12,
+        // Change drawer icon color
+        iconTheme: IconThemeData(color: Colors.white),
         title: Image.asset("assets/images/logo_transparent.png",
             height: 55, width: 300),
         actions: [

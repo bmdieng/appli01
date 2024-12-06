@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:ligueypro/constants/constants.dart';
 
@@ -21,9 +24,15 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
   final TextEditingController _adresse = TextEditingController();
   TextEditingController phone = TextEditingController();
   Map<dynamic, dynamic> userData = {};
-
+  late AdSize adSize;
+  BannerAd? _bannerAd;
   String profileValue = 'Recruteur';
   String categorieValue = '';
+  final String adUnitId = Platform.isAndroid
+      // Use this ad unit on Android...
+      ? 'ca-app-pub-6465472367747294~8123626544'
+      // ... or this one on iOS.
+      : 'ca-app-pub-3940256099942544/2934735716';
 
   var profileList = [
     "Recruteur",
@@ -43,6 +52,36 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
     'Gardien',
     'Autres'
   ];
+
+  /// Loads a banner ad.
+  void _loadAd() {
+    debugPrint("----- CHARGEMENT DE LA BANNIERE -------$AdSize, $adUnitId");
+    final bannerAd = BannerAd(
+      size: adSize,
+      adUnitId: adUnitId,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          if (!mounted) {
+            ad.dispose();
+            return;
+          }
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, error) {
+          debugPrint('Erreur lors du chargement de la bannière: $error');
+          ad.dispose();
+        },
+      ),
+    );
+
+    // Start loading.
+    bannerAd.load();
+  }
 
   bool validateEmail(String value) {
     bool emailValid = RegExp(
@@ -162,6 +201,7 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     User? user = FirebaseAuth.instance.currentUser;
+    adSize = AdSize.banner;
 
     assert(_username != null, '');
     assert(_email != null, '');
@@ -184,6 +224,15 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
                         child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Container(
+                      width: adSize.width.toDouble(),
+                      height: adSize.height.toDouble(),
+                      child: _bannerAd == null
+                          // Nothing to render yet.
+                          ? SizedBox()
+                          // The actual ad.
+                          : AdWidget(ad: _bannerAd!),
+                    ),
                     Container(
                       child: SizedBox(
                           width: 150,

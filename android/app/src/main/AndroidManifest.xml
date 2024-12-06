@@ -47,6 +47,9 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDVp2hgX3hKMinqjH5B38hA-YrluioT-7E" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~6300978111" />
     </application>
 
     <!-- Required to query activities that can process text, see:

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -210,7 +208,6 @@ class AuthExceptionHandler {
 
   static String generateErrorMessage(error) {
     String errorMessage;
-    print("************** Message d'erreur $error ");
     switch (error) {
       case "invalid-email":
         errorMessage = "Votre adresse e-mail semble être mal formée.";

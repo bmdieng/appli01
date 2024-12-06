@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:ligueypro/constants/constants.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,6 +18,60 @@ class LoginPageState extends State<LoginPage> {
   String _password = '';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   User? user = FirebaseAuth.instance.currentUser;
+  late AdSize adSize;
+  BannerAd? _bannerAd;
+
+  /// The AdMob ad unit to show.
+  ///
+  /// TODO: replace this test ad unit with your own ad unit
+  final String adUnitId = Platform.isAndroid
+      // Use this ad unit on Android...
+      ? 'ca-app-pub-6465472367747294~8123626544'
+      // ... or this one on iOS.
+      : 'ca-app-pub-3940256099942544/2934735716';
+
+  @override
+  void initState() {
+    adSize = AdSize.banner;
+    _loadAd();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
+  /// Loads a banner ad.
+  void _loadAd() {
+    debugPrint("----- CHARGEMENT DE LA BANNIERE -------$AdSize, $adUnitId");
+    final bannerAd = BannerAd(
+      size: adSize,
+      adUnitId: adUnitId,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          if (!mounted) {
+            ad.dispose();
+            return;
+          }
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, error) {
+          debugPrint('Erreur lors du chargement de la bannière: $error');
+          ad.dispose();
+        },
+      ),
+    );
+
+    // Start loading.
+    bannerAd.load();
+  }
 
   String? validateEmail(String? email) {
     if (email!.isEmpty) {
@@ -267,7 +323,7 @@ class LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 150), // Add space before footer
+                const SizedBox(height: 125), // Add space before footer
                 // Footer Section
                 Container(
                   // color: const Color(0xFFBB8547), // Footer background color
@@ -281,6 +337,15 @@ class LoginPageState extends State<LoginPage> {
                         fontWeight: FontWeight.w900),
                     textAlign: TextAlign.center,
                   ),
+                ),
+                SizedBox(
+                  width: adSize.width.toDouble(),
+                  height: adSize.height.toDouble(),
+                  child: _bannerAd == null
+                      // Nothing to render yet.
+                      ? SizedBox()
+                      // The actual ad.
+                      : AdWidget(ad: _bannerAd!),
                 ),
               ],
             ),
