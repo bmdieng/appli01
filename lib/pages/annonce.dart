@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -43,20 +42,7 @@ class _AnnoncePageState extends State<AnnoncePage> {
     "Employé",
   ];
 
-  var ouvrierList = [
-    '',
-    'Femme / Homme de ménage',
-    'Cuisinier',
-    'Electricien',
-    'Plombier',
-    'Jardinier',
-    'Nounou',
-    'Menuisier',
-    'Courtier',
-    'Chauffeur',
-    'Gardien',
-    'Autres'
-  ];
+  var ouvrierList = [];
 
   @override
   void initState() {
@@ -72,10 +58,19 @@ class _AnnoncePageState extends State<AnnoncePage> {
   void _fetchData(String path) {
     var req = _database.child(path);
 
-    req.onValue.listen((event) {
-      final data = event.snapshot.value;
-      print('----------------------$data');
-      setState(() {});
+    req.onValue.listen((event) async {
+      // final data = event.snapshot.value;
+      DatabaseEvent event = await req.once();
+      var snapshot = event.snapshot;
+      List<dynamic> list = [];
+      snapshot.children.forEach((child) {
+        list.add(child.value);
+      });
+      print(list);
+      setState(() {
+        ouvrierList = list;
+        print('----------- ouvrierList -----------$ouvrierList');
+      });
     });
   }
 
@@ -289,82 +284,6 @@ class _AnnoncePageState extends State<AnnoncePage> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    // TextFormField(
-                    //   controller: _email,
-                    //   validator: (value) {
-                    //     if (value == null || value.isEmpty) {
-                    //       return "Email";
-                    //     } else if (!validateEmail(value)) {
-                    //       return "Adresse email invalide.";
-                    //     }
-                    //     return null;
-                    //   },
-                    //   style: const TextStyle(
-                    //       fontSize: 18,
-                    //       fontStyle: FontStyle.normal,
-                    //       color: Colors.brown),
-                    //   decoration: InputDecoration(
-                    //       errorStyle: const TextStyle(
-                    //           fontSize: 10,
-                    //           fontStyle: FontStyle.normal,
-                    //           color: Colors.red),
-                    //       labelText: "Email",
-                    //       prefixIcon: const Icon(
-                    //         Icons.email_rounded,
-                    //         color: Color(0xFFBB8547),
-                    //       ),
-                    //       labelStyle: const TextStyle(
-                    //           fontSize: 18,
-                    //           fontStyle: FontStyle.normal,
-                    //           color: Colors.brown),
-                    //       enabledBorder: OutlineInputBorder(
-                    //           borderSide: const BorderSide(
-                    //               color: Colors.brown, width: 1),
-                    //           borderRadius: BorderRadius.circular(10)),
-                    //       border: OutlineInputBorder(
-                    //           borderRadius: BorderRadius.circular(10))),
-                    // ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    // TextFormField(
-                    //   controller: phone,
-                    //   keyboardType: TextInputType.phone,
-                    //   validator: (value) {
-                    //     if (value == null || value.isEmpty) {
-                    //       return "numéro de tel";
-                    //     }
-                    //     return null;
-                    //   },
-                    //   style: const TextStyle(
-                    //       fontSize: 18,
-                    //       fontStyle: FontStyle.normal,
-                    //       color: Colors.brown),
-                    //   decoration: InputDecoration(
-                    //       errorStyle: const TextStyle(
-                    //           fontSize: 10,
-                    //           fontStyle: FontStyle.normal,
-                    //           color: Colors.red),
-                    //       labelText: "Téléphone",
-                    //       prefixIcon: const Icon(
-                    //         Icons.call_end_rounded,
-                    //         color: Color(0xFFBB8547),
-                    //       ),
-                    //       labelStyle: const TextStyle(
-                    //           fontSize: 18,
-                    //           fontStyle: FontStyle.normal,
-                    //           color: Colors.brown),
-                    //       enabledBorder: OutlineInputBorder(
-                    //           borderSide: const BorderSide(
-                    //               color: Colors.brown, width: 1),
-                    //           borderRadius: BorderRadius.circular(10)),
-                    //       border: OutlineInputBorder(
-                    //           borderRadius: BorderRadius.circular(10))),
-                    // ),
-
                     const SizedBox(
                       height: 20,
                     ),
@@ -491,29 +410,33 @@ class _AnnoncePageState extends State<AnnoncePage> {
                             hint: Text(
                               categorieValue,
                               style: const TextStyle(
-                                  fontSize: 1,
-                                  color: Colors.brown,
-                                  height: 2.0),
+                                fontSize: 14,
+                                color: Colors.brown,
+                                height: 2.0,
+                              ),
                               textAlign: TextAlign.center,
                             ),
-                            underline: Container(child: const Column()),
-                            value: categorieValue,
+                            underline: SizedBox(), // Removes the underline
+                            value:
+                                categorieValue.isEmpty ? null : categorieValue,
                             icon: const Icon(Icons.keyboard_arrow_down),
-                            items: ouvrierList.map((String items) {
-                              return DropdownMenuItem(
-                                  value: items,
-                                  child: Text(
-                                    items,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFFa5a5a5),
-                                    ),
-                                  ));
+                            items: ouvrierList
+                                .map<DropdownMenuItem<String>>((dynamic item) {
+                              return DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xFFa5a5a5),
+                                  ),
+                                ),
+                              );
                             }).toList(),
-                            onChanged: (newValue) {
+                            onChanged: (String? newValue) {
                               setState(() {
-                                categorieValue = newValue.toString();
+                                categorieValue = newValue ?? '';
                               });
                             },
                           )

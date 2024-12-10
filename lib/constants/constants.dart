@@ -213,7 +213,8 @@ class AuthExceptionHandler {
         errorMessage = "Votre adresse e-mail semble être mal formée.";
         break;
       case "invalid-credential":
-        errorMessage = "Adresse e-mail ou mot de passe erroné!";
+        errorMessage =
+            "Les informations d'identification fournies sont incorrectes, malformées ou ont expiré.";
         break;
       case "weak-password":
         errorMessage =

@@ -19,25 +19,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final List<dynamic> _offerList = [];
   final List<dynamic> _annonceList = [];
   String selectedValue = "Tous";
-  var ouvrierList = [
-    'Tous',
-    'Femme / Homme de ménage',
-    'Cuisinier',
-    'Electricien',
-    'Plombier',
-    'Jardinier',
-    'Nounou',
-    'Menuisier',
-    'Courtier',
-    'Chauffeur',
-    'Gardien',
-    'Autres'
-  ];
+  var ouvrierList = [];
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
+    _fetchOuvrierList('metiers');
     _fetchData('offres_emploi', _offerList, selectedValue);
     _fetchData('offres_profile', _annonceList, selectedValue);
   }
@@ -46,6 +34,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void dispose() {
     tabController.dispose();
     super.dispose();
+  }
+
+  void _fetchOuvrierList(String path) {
+    var req = _database.child(path);
+
+    req.onValue.listen((event) async {
+      // final data = event.snapshot.value;
+      DatabaseEvent event = await req.once();
+      var snapshot = event.snapshot;
+      List<dynamic> list = [];
+      snapshot.children.forEach((child) {
+        list.add(child.value);
+      });
+      list.add('Tous');
+      print(list);
+      setState(() {
+        ouvrierList = list;
+        print('----------- ouvrierList -----------$ouvrierList');
+      });
+    });
   }
 
   void _fetchData(String path, List<dynamic> targetList, String selectedValue) {
@@ -228,15 +236,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   children: [
                     const TextSpan(
                       text: 'Aucun élément trouvé\n',
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Color(0xFFBB8547),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     WidgetSpan(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
                         child: Image.asset(
-                          'assets/images/not_found.png',
-                          width: 100,
-                          height: 100,
+                          'assets/images/not_found_.png',
+                          width: 250,
+                          height: 250,
                         ),
                       ),
                     ),
@@ -405,10 +417,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           });
                         },
                         items: ouvrierList
-                            .map<DropdownMenuItem<String>>((String value) {
+                            .map<DropdownMenuItem<String>>((dynamic item) {
                           return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 32, 33, 59),
+                              ),
+                            ),
                           );
                         }).toList(),
                         hint: const Text(

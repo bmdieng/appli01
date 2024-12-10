@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
             "phone": phone.text.trim(),
             'date': DateFormat("dd-MMM-yyyy HH:mm").format(DateTime.now())
           });
-          Navigator.pushNamed(context, '/login');
+          Navigator.pushNamed(context, '/');
         }
       });
     } on FirebaseAuthException catch (e) {

@@ -24,6 +24,7 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
   final TextEditingController _adresse = TextEditingController();
   TextEditingController phone = TextEditingController();
   Map<dynamic, dynamic> userData = {};
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
   late AdSize adSize;
   BannerAd? _bannerAd;
   String profileValue = 'Recruteur';
@@ -38,20 +39,37 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
     "Recruteur",
   ];
 
-  var ouvrierList = [
-    '',
-    'Femme / Homme de ménage',
-    'Cuisinier',
-    'Electricien',
-    'Plombier',
-    'Jardinier',
-    'Nounou',
-    'Menuisier',
-    'Courtier',
-    'Chauffeur',
-    'Gardien',
-    'Autres'
-  ];
+  var ouvrierList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData('metiers');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void _fetchData(String path) {
+    var req = _database.child(path);
+
+    req.onValue.listen((event) async {
+      // final data = event.snapshot.value;
+      DatabaseEvent event = await req.once();
+      var snapshot = event.snapshot;
+      List<dynamic> list = [];
+      snapshot.children.forEach((child) {
+        list.add(child.value);
+      });
+      print(list);
+      setState(() {
+        ouvrierList = list;
+        print('----------- ouvrierList -----------$ouvrierList');
+      });
+    });
+  }
 
   /// Loads a banner ad.
   void _loadAd() {
@@ -402,29 +420,33 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
                             hint: Text(
                               categorieValue,
                               style: const TextStyle(
-                                  fontSize: 1,
-                                  color: Colors.brown,
-                                  height: 2.0),
+                                fontSize: 14,
+                                color: Colors.brown,
+                                height: 2.0,
+                              ),
                               textAlign: TextAlign.center,
                             ),
-                            underline: Container(child: const Column()),
-                            value: categorieValue,
+                            underline: SizedBox(), // Removes the underline
+                            value:
+                                categorieValue.isEmpty ? null : categorieValue,
                             icon: const Icon(Icons.keyboard_arrow_down),
-                            items: ouvrierList.map((String items) {
-                              return DropdownMenuItem(
-                                  value: items,
-                                  child: Text(
-                                    items,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFFa5a5a5),
-                                    ),
-                                  ));
+                            items: ouvrierList
+                                .map<DropdownMenuItem<String>>((dynamic item) {
+                              return DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xFFa5a5a5),
+                                  ),
+                                ),
+                              );
                             }).toList(),
-                            onChanged: (newValue) {
+                            onChanged: (String? newValue) {
                               setState(() {
-                                categorieValue = newValue.toString();
+                                categorieValue = newValue ?? '';
                               });
                             },
                           )

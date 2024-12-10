@@ -32,7 +32,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 "Un lien de réinitialisation du mot de passe a été envoyé à votre adresse adresse e-mail!")),
       );
       // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, '/login');
+      Navigator.pushNamed(context, '/');
     } on FirebaseAuthException catch (e) {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
