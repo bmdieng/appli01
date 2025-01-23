@@ -23,8 +23,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }
 
   Future<void> sendPasswordResetEmail() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
     try {
       await auth.sendPasswordResetEmail(email: _emailController.text.trim());
+      Navigator.of(context).pop();
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -34,6 +40,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       // ignore: use_build_context_synchronously
       Navigator.pushNamed(context, '/');
     } on FirebaseAuthException catch (e) {
+      print("********************${e.code}");
+      Navigator.of(context).pop();
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

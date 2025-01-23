@@ -6,7 +6,6 @@ import 'package:ligueypro/pages/annonce.dart';
 import 'package:ligueypro/pages/apropos.dart';
 import 'package:ligueypro/pages/avis.dart';
 import 'package:ligueypro/pages/charte.dart';
-import 'package:ligueypro/pages/geoloc.dart';
 import 'package:ligueypro/pages/home_page.dart';
 import 'package:ligueypro/pages/login.dart';
 import 'package:ligueypro/pages/professionnel.dart';
@@ -49,8 +48,7 @@ class MyApp extends StatelessWidget {
         '/charte': (context) => const ChartePage(),
         '/aide': (context) => const AidePage(),
         '/reset_password': (context) => const ResetPasswordPage(),
-        '/avis': (context) => AvisSuggestionPage(),
-        '/geoloc': (context) => MapScreen()
+        '/avis': (context) => AvisSuggestionPage()
       },
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [

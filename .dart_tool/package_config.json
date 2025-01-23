@@ -212,12 +212,6 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "fixnum",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/fixnum-1.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.1"
-    },
-    {
       "name": "flutter",
       "rootUri": "file:///Users/macbookpro/Documents/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -248,12 +242,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.23",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
       "name": "flutter_test",
       "rootUri": "file:///Users/macbookpro/Documents/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -278,82 +266,10 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "geolocator",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/geolocator-13.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "geolocator_android",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/geolocator_android-4.6.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "geolocator_apple",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.8+1",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "geolocator_platform_interface",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/geolocator_platform_interface-4.2.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "geolocator_web",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/geolocator_web-4.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "geolocator_windows",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/geolocator_windows-0.2.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
       "name": "google_fonts",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_fonts-6.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
-    },
-    {
-      "name": "google_maps",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps-8.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "google_maps_flutter",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter-2.10.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "google_maps_flutter_android",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter_android-2.14.11",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
-      "name": "google_maps_flutter_ios",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.13.2",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
-    },
-    {
-      "name": "google_maps_flutter_platform_interface",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter_platform_interface-2.9.5",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
-    },
-    {
-      "name": "google_maps_flutter_web",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/google_maps_flutter_web-0.5.10",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
     },
     {
       "name": "google_mobile_ads",
@@ -572,12 +488,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "sanitize_html",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/sanitize_html-2.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "shared_preferences",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/shared_preferences-2.3.3",
       "packageUri": "lib/",
@@ -632,12 +542,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "sprintf",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/sprintf-7.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "stack_trace",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
@@ -648,12 +552,6 @@
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.19"
-    },
-    {
-      "name": "stream_transform",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/stream_transform-2.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
     },
     {
       "name": "string_scanner",
@@ -734,12 +632,6 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "uuid",
-      "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/uuid-4.5.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
       "name": "vector_math",
       "rootUri": "file:///Users/macbookpro/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -806,7 +698,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-12-06T10:12:22.616991Z",
+  "generated": "2025-01-22T11:11:36.765159Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/macbookpro/Documents/flutter",

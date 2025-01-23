@@ -359,17 +359,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         iconTheme: IconThemeData(color: Colors.white),
         title: Image.asset("assets/images/logo_transparent.png",
             height: 55, width: 300),
-        actions: [
-          IconButton(
-            constraints: const BoxConstraints(
-              minWidth: 80, // Largeur minimale pour inclure un espace
-            ),
-            icon: const Icon(Icons.map_outlined, color: Colors.white, size: 24),
-            onPressed: () {
-              Navigator.pushNamed(context, '/geoloc');
-            },
-          ),
-        ],
+        actions: [],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(80.0),
           child: Column(
