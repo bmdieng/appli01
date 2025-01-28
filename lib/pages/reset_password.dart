@@ -79,7 +79,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 Center(
                   child: SizedBox(
                       width: 230,
-                      height: 100,
+                      height: 70,
                       child: Image.asset('assets/images/logo_transparent.png')),
                 ),
                 const SizedBox(height: 20),
@@ -116,7 +116,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     controller: _emailController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Empty email';
+                        return 'Adresse email vide';
                       }
                       return null;
                     },

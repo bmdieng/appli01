@@ -503,7 +503,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Container(
                       width: size.width,
-                      height: 50,
+                      height: 30,
                       child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
